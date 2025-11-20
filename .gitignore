@@ -65,6 +65,10 @@ data/chroma/
 .replit
 replit.nix
 
+# UV lock files (conflicts with requirements.txt)
+uv.lock
+pyproject.toml
+
 # Temporary files
 *.tmp
 *.bak
