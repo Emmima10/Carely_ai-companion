@@ -607,8 +607,8 @@ Generate greeting:"""
         if medications:
             med_names = [med.name for med in medications[:3]]
             questions.extend([
-                f"Do you remember what medication you take in the morning?",
-                f"Can you tell me the name of your heart medication?",
+                f"Do you remember what medication you take at night?",
+                f"Can you tell me the name of your blood pressure medication?",
             ])
         
         # Questions about personal events
@@ -674,52 +674,155 @@ Generate greeting:"""
         return {"score": score, "label": label, "confidence": 0.6, "emotions": emotions}
     
     def _local_emergency_detection(self, message: str, user_id: int) -> Dict[str, Any]:
-        """Local keyword-based emergency detection (no API call)"""
+        """
+        Local keyword-based emergency detection (no external API).
+        
+        Returns a dict:
+        {
+            "is_emergency": bool,
+            "severity_label": "Critical" | "Concerning" | "Manageable",
+            "severity_emoji": "🚨" | "⚠️",
+            "symptom_summary": str,
+            "raw_message": str,
+            "user_id": int,
+        }
+        """
         message_lower = message.lower()
         
-        # Critical emergency keywords
-        critical_keywords = ["chest pain", "can't breathe", "cannot breathe", "heart attack", 
-                            "stroke", "fell", "bleeding", "unconscious", "dizzy", "fainted"]
+        # --- 1) Phrases that clearly are NOT medical emergencies -----------------
+        non_emergency_help_phrases = [
+            "help me with",
+            "help me go through",
+            "help me understand",
+            "help me write",
+            "help me study",
+            "help me cook",
+            "help me code",
+            "help me solve",
+        ]
         
-        # High severity keywords
-        high_keywords = ["pain", "hurt", "emergency", "help me", "fallen", "can't move",
-                        "difficulty breathing", "severe", "blood"]
+        # --- 2) Generic "ask for help" phrases -----------------------------------
+        help_phrases = [
+            "help me",
+            "need help",
+            "please help",
+            "i need your help",
+        ]
         
-        # Medium severity keywords
-        medium_keywords = ["dizzy", "confused", "nausea", "headache", "weak", "tired", 
-                          "worried", "scared", "anxious"]
+        # --- 3) Symptom / emergency keywords ------------------------------------
+        # Critical emergency – life-threatening red flags
+        critical_keywords = [
+            "chest pain",
+            "crushing chest",
+            "can't breathe",
+            "cannot breathe",
+            "short of breath and chest pain",
+            "heart attack",
+            "stroke",
+            "slurred speech",
+            "face drooping",
+            "unconscious",
+            "not waking up",
+            "fainted and not waking",
+        ]
         
-        is_critical = any(keyword in message_lower for keyword in critical_keywords)
-        is_high = any(keyword in message_lower for keyword in high_keywords)
-        is_medium = any(keyword in message_lower for keyword in medium_keywords)
+        # High severity – serious but not automatically life-threatening
+        high_symptom_keywords = [
+            "severe pain",
+            "severe headache",
+            "worst headache",
+            "hurts a lot",
+            "terrible pain",
+            "can't move",
+            "cannot move",
+            "lost feeling",
+            "numbness",
+            "difficulty breathing",
+            "short of breath",
+            "breathing is hard",
+            "bleeding a lot",
+            "blood everywhere",
+            "fell and hit my head",
+            "broken bone",
+            "fractured bone",
+        ]
         
-        if is_critical:
-            return {
-                "is_emergency": True,
-                "severity": "critical",
-                "concerns": ["Possible medical emergency detected"],
-                "should_alert": True
-            }
-        elif is_high:
-            return {
-                "is_emergency": True,
-                "severity": "high",
-                "concerns": ["Concerning symptoms reported"],
-                "should_alert": True
-            }
-        elif is_medium:
-            return {
-                "is_emergency": False,
-                "severity": "medium",
-                "concerns": ["Minor health concern mentioned"],
-                "should_alert": False
-            }
+        # Medium severity – concerning but often manageable
+        medium_symptom_keywords = [
+            "dizzy",
+            "lightheaded",
+            "light-headed",
+            "confused",
+            "nausea",
+            "nauseous",
+            "vomiting",
+            "throwing up",
+            "headache",
+            "migraine",
+            "weak",
+            "very tired",
+            "exhausted",
+            "shaky",
+            "worried",
+            "scared",
+            "anxious",
+            "anxiety attack",
+            "panic attack",
+        ]
+        
+        # Words that explicitly indicate emergency context
+        emergency_context_keywords = [
+            "call 911",
+            "call the ambulance",
+            "go to the er",
+            "going to the er",
+            "go to the emergency room",
+            "medical emergency",
+            "this is an emergency",
+        ]
+        
+        # ---- 4) Compute flags ---------------------------------------------------
+        has_non_emergency_help = any(p in message_lower for p in non_emergency_help_phrases)
+        has_help = any(p in message_lower for p in help_phrases) and not has_non_emergency_help
+        
+        has_critical_symptom = any(k in message_lower for k in critical_keywords)
+        has_high_symptom = any(k in message_lower for k in high_symptom_keywords)
+        has_medium_symptom = any(k in message_lower for k in medium_symptom_keywords)
+        has_emergency_context = any(k in message_lower for k in emergency_context_keywords)
+        
+        # If nothing looks like a symptom, bail out
+        if not (has_critical_symptom or has_high_symptom or has_medium_symptom or has_emergency_context):
+            return {"is_emergency": False}
+        
+        # ---- 5) Decide severity -----------------------------------------------
+        # Critical: strong red-flag symptoms, or explicit emergency + high symptoms
+        if has_critical_symptom or (has_emergency_context and (has_high_symptom or has_critical_symptom)):
+            severity_label = "Critical"
+            severity_emoji = "🚨"
+            symptom_summary = "Possible life-threatening emergency reported"
+        # High: serious symptoms + asking for help or emergency context
+        elif has_high_symptom and (has_help or has_emergency_context):
+            severity_label = "Concerning"
+            severity_emoji = "⚠️"
+            symptom_summary = "Concerning symptoms reported"
+        # Medium: moderate symptoms + asking for help
+        elif has_medium_symptom and has_help:
+            severity_label = "Manageable"
+            severity_emoji = "⚠️"
+            symptom_summary = "Manageable but important symptoms reported"
+        else:
+            # Fallback – treat as medium if we're unsure but see symptoms
+            severity_label = "Manageable"
+            severity_emoji = "⚠️"
+            symptom_summary = "Symptoms reported"
         
         return {
-            "is_emergency": False,
-            "severity": "none",
-            "concerns": [],
-            "should_alert": False
+            "is_emergency": True,
+            "severity_label": severity_label,
+            "severity_emoji": severity_emoji,
+            "symptom_summary": symptom_summary,
+            "raw_message": message,
+            "user_id": user_id,
         }
 
     def should_alert_caregiver(self, user_id: int, sentiment_score: float,
@@ -1330,7 +1433,8 @@ Respond naturally and warmly based on ALL the context provided."""
                 "emergency_concerns": emergency_concerns,
                 "should_alert": should_alert,
                 "quick_actions": quick_actions,
-                "contains_pii": contains_pii  # Flag for UI to show warning
+                "contains_pii": contains_pii,  # Flag for UI to show warning
+                "emergency_result": emergency_result  # Full emergency detection result for Telegram
             }
 
         except Exception as e:

@@ -22,13 +22,68 @@ from utils.timezone_utils import format_central_time, to_central, now_central
 
 
 def apply_elderly_friendly_styling():
-    """Apply elderly-friendly CSS styling with soft pastel colors and smooth transitions"""
+    """Apply modern health & wellness inspired CSS styling with optimized spacing"""
     st.markdown("""
         <style>
-        /* Import Poppins and Inter fonts for better readability */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+        /* Import modern fonts - Poppins and Inter for health app aesthetics */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
         
-        /* Bright soft pastel gradient background */
+        /* CSS VARIABLES - Modern Health & Wellness Color Scheme */
+        :root {
+            /* Primary Colors - Inspired by Calm/Headspace */
+            --primary-teal: #2D9CDB;
+            --primary-green: #27AE60;
+            --secondary-coral: #FF6B6B;
+            --secondary-salmon: #E76F51;
+            
+            /* Backgrounds - Clean and airy */
+            --bg-primary: #F8F9FA;
+            --bg-secondary: #FDFDFD;
+            --bg-card: #FFFFFF;
+            
+            /* Text Colors - High contrast for seniors */
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --text-muted: #95A5A6;
+            
+            /* Accent Colors - MyFitnessPal inspired */
+            --accent-blue: #667EEA;
+            --accent-lavender: #764BA2;
+            --accent-mint: #4ECDC4;
+            --accent-peach: #FFB88C;
+            
+            /* Status Colors - Traffic light system */
+            --status-success: #27AE60;
+            --status-warning: #F39C12;
+            --status-danger: #E74C3C;
+            --status-info: #3498DB;
+            
+            /* Event Colors - Color-coded categories */
+            --event-medical: #5DADE2;
+            --event-social: #F9E79F;
+            --event-personal: #7DCEA0;
+            
+            /* Gradients - Calm/Headspace inspired */
+            --gradient-header: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            --gradient-card-blue: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 100%);
+            --gradient-card-peach: linear-gradient(135deg, #FFF3E0 0%, #FFE0E0 100%);
+            --gradient-mood-positive: linear-gradient(135deg, #A8E6CF 0%, #7DCEA0 100%);
+            --gradient-mood-neutral: linear-gradient(135deg, #FFE8B8 0%, #FFD89C 100%);
+            --gradient-mood-concern: linear-gradient(135deg, #FFB8B8 0%, #FF9999 100%);
+            
+            /* Shadows - Subtle depth */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            
+            /* Border Radius - Modern rounded corners */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+        
+        /* Modern gradient background with wellness app feel */
         .stApp {
             background: linear-gradient(135deg, 
                 #FFF5F7 0%,    /* Very light pink */
@@ -40,63 +95,90 @@ def apply_elderly_friendly_styling():
             background-attachment: fixed !important;
         }
         
+        /* ========== AGGRESSIVE WHITESPACE REDUCTION ========== */
+        
+        /* Remove ALL top spacing from main content */
+        .main .block-container,
+        [data-testid="stAppViewContainer"] .main .block-container,
+        section.main > div,
+        .block-container {
+            padding-top: 0.5rem !important;
+            margin-top: 0rem !important;
+        }
+        
+        /* Remove spacing from element containers */
+        .main .element-container:first-child {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        /* Remove gap from vertical blocks */
+        .main [data-testid="stVerticalBlock"]:first-child {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
         /* Global font settings - Inter for body */
         html, body, [class*="css"] {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 18px !important;
-            line-height: 1.7 !important;
+            font-size: 16px !important;
+            line-height: 1.4 !important;
             color: #4A5568 !important;
         }
         
-        /* Main content area */
+        /* Main content area - ULTRA COMPACT SPACING */
         .main {
             background: transparent !important;
-            padding: 2rem;
+            padding: 0.5rem 1rem !important;
         }
         
         .block-container {
             background: transparent !important;
-            padding-top: 2.5rem;
+            padding-top: 0.2rem !important;
+            padding-bottom: 0.5rem !important;
             max-width: 1400px !important;
         }
         
-        /* Headings - Poppins font with bright pastel colors */
+        /* Headings - COMPACT SPACING */
         h1 {
             font-family: 'Poppins', sans-serif !important;
-            font-size: 2.8rem !important;
+            font-size: 2rem !important;
             font-weight: 600 !important;
-            color: #E08E7B !important; /* Bright coral pink */
-            margin-bottom: 0.8rem !important;
+            color: #E08E7B !important;
+            margin-bottom: 0.3rem !important;
             margin-top: 0 !important;
-            letter-spacing: -0.5px !important;
+            line-height: 1.1 !important;
         }
         
         h2 {
             font-family: 'Poppins', sans-serif !important;
-            font-size: 2rem !important;
+            font-size: 1.4rem !important;
             font-weight: 600 !important;
-            color: #D4A5A5 !important; /* Bright dusty rose */
-            margin-top: 1.8rem !important;
-            margin-bottom: 1rem !important;
+            color: #D4A5A5 !important;
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.3rem !important;
+            line-height: 1.2 !important;
         }
         
         h3 {
             font-family: 'Poppins', sans-serif !important;
-            font-size: 1.5rem !important;
-            font-weight: 500 !important;
-            color: #9DB4CE !important; /* Bright periwinkle blue */
-            margin-top: 0.8rem !important;
-            margin-bottom: 0.6rem !important;
-        }
-        
-        /* Paragraphs and text */
-        p, .stMarkdown {
             font-size: 1.1rem !important;
-            color: #4A5568 !important;
-            line-height: 1.8 !important;
+            font-weight: 500 !important;
+            color: #9DB4CE !important;
+            margin-top: 0.3rem !important;
+            margin-bottom: 0.2rem !important;
+            line-height: 1.2 !important;
         }
         
-        /* Sidebar styling - bright gradient */
+        /* Paragraphs and text - COMPACT */
+        p, .stMarkdown {
+            font-size: 0.95rem !important;
+            color: #4A5568 !important;
+            line-height: 1.3 !important;
+            margin-bottom: 0.3rem !important;
+        }
+        
+        /* Sidebar styling - compact */
         [data-testid="stSidebar"] {
             background: linear-gradient(180deg, 
                 #FFF0F5 0%,    /* Lavender blush */
@@ -104,341 +186,360 @@ def apply_elderly_friendly_styling():
                 #F0F8FF 100%   /* Alice blue */
             ) !important;
             border-right: 2px solid rgba(224, 142, 123, 0.15) !important;
-            padding-top: 2rem;
-            box-shadow: 4px 0 20px rgba(0,0,0,0.02) !important;
+            padding-top: 1rem !important;
         }
         
-        [data-testid="stSidebar"] h1, 
-        [data-testid="stSidebar"] h2,
-        [data-testid="stSidebar"] h3 {
-            font-family: 'Poppins', sans-serif !important;
-            color: #9DB4CE !important;
-            font-size: 1.3rem !important;
-        }
-        
-        /* Buttons - bright pastel gradients with smooth transitions */
+        /* Buttons - compact with purple gradient styling */
         .stButton button {
             font-family: 'Poppins', sans-serif !important;
-            font-size: 0.95rem !important;
-            padding: 0.6rem 0.4rem !important;
-            border-radius: 16px !important;
-            font-weight: 500 !important;
-            background: linear-gradient(135deg, #F5CAC3 0%, #E08E7B 100%) !important; /* Bright coral gradient */
+            font-size: 0.85rem !important;
+            padding: 0.4rem 0.3rem !important;
+            border-radius: 12px !important;
+            min-height: 50px !important;
+            margin: 0.1rem 0 !important;
+        }
+        
+        /* Quick Actions buttons - specific styling to prevent text overflow */
+        button[key*="persistent_"] {
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 0.75rem !important;
+            font-weight: 600 !important;
+            padding: 0.6rem 0.8rem !important;
+            line-height: 1.3 !important;
+            white-space: normal !important;
+            overflow: hidden !important;
+            text-overflow: clip !important;
+            height: auto !important;
+            min-height: 60px !important;
+            max-width: 100% !important;
+            text-align: left !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            word-wrap: break-word !important;
+            box-sizing: border-box !important;
+        }
+        
+        button[key*="persistent_"] span {
+            display: inline-block !important;
+            width: 100% !important;
+            text-align: left !important;
+            vertical-align: middle !important;
+        }
+        
+        /* Apply purple gradient to all secondary buttons across all sections */
+        button[kind="secondary"],
+        .stButton button[kind="secondary"] {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%) !important;
             color: white !important;
             border: none !important;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            box-shadow: 0 4px 12px rgba(224, 142, 123, 0.3) !important;
-            min-height: 65px !important;
-            height: auto !important;
-            white-space: pre-line !important;
-            line-height: 1.3 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            backdrop-filter: blur(10px) !important;
-            text-align: center !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2) !important;
         }
         
-        /* Center all button text content */
-        .stButton button p,
-        .stButton button div {
-            text-align: center !important;
-            justify-content: center !important;
-            margin: 0 auto !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-            font-size: 0.95rem !important;
+        button[kind="secondary"]:hover,
+        .stButton button[kind="secondary"]:hover {
+            background: linear-gradient(135deg, #5568D3 0%, #654A8F 100%) !important;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3) !important;
+            transform: translateY(-2px) !important;
         }
         
-        /* Fix Streamlit's default button left alignment */
-        .stButton > button > div[data-testid="stMarkdownContainer"] > p {
-            text-align: center !important;
-            word-wrap: break-word !important;
-            font-size: 0.95rem !important;
-        }
-        
-        /* Ensure button content wrapper is centered */
-        .stButton > button[data-testid="baseButton-secondary"] {
-            text-align: center !important;
-        }
-        
-        .stButton > button[data-testid="baseButton-secondary"] > div {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            width: 100% !important;
-        }
-        
-        .stButton button:hover {
-            background: linear-gradient(135deg, #FFB6A3 0%, #FF9980 100%) !important; /* Brighter on hover */
-            transform: translateY(-3px) scale(1.02) !important;
-            box-shadow: 0 8px 20px rgba(255, 153, 128, 0.4) !important;
-        }
-        
-        .stButton button:active {
-            transform: translateY(-1px) scale(0.98) !important;
+        button[kind="secondary"]:active,
+        .stButton button[kind="secondary"]:active {
+            transform: translateY(0px) !important;
         }
         
         /* Primary buttons (send button) */
         .stButton button[kind="primary"],
         .stButton button[data-testid="baseButton-primary"] {
-            background: linear-gradient(135deg, #B4D7E0 0%, #9DB4CE 100%) !important; /* Bright sky blue */
-            color: white !important;
-            min-height: 52px !important;
-            height: 52px !important;
-            font-size: 1.4rem !important;
-            padding: 0 1.5rem !important;
-            box-shadow: 0 4px 14px rgba(157, 180, 206, 0.35) !important;
-        }
-        
-        .stButton button[kind="primary"]:hover {
-            background: linear-gradient(135deg, #9DC8E0 0%, #7FA7CC 100%) !important;
-            box-shadow: 0 6px 18px rgba(127, 167, 204, 0.45) !important;
-        }
-        
-        /* Text inputs - bright and clean */
-        .stTextInput input {
+            min-height: 45px !important;
+            height: 45px !important;
             font-size: 1.2rem !important;
-            padding: 0.95rem 1.2rem !important;
-            border-radius: 14px !important;
-            border: 2px solid rgba(224, 142, 123, 0.3) !important;
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            color: #4A5568 !important;
-            caret-color: #E08E7B !important;
-            height: 52px !important;
-            line-height: 1.6 !important;
-            transition: all 0.3s ease !important;
-            backdrop-filter: blur(10px) !important;
+            padding: 0 1rem !important;
         }
         
-        .stTextInput input::placeholder {
-            color: #B8B8D0 !important;
-            opacity: 0.7 !important;
-        }
-        
-        .stTextInput input:focus {
-            border-color: #E08E7B !important;
-            box-shadow: 0 0 0 4px rgba(224, 142, 123, 0.2) !important;
-            background-color: #FFFFFF !important;
-            transform: translateY(-1px) !important;
-        }
-        
-        /* Select boxes - bright styling */
-        .stSelectbox select {
-            font-size: 1.15rem !important;
-            padding: 0.85rem 1rem !important;
+        /* Text inputs - compact */
+        .stTextInput input {
+            font-size: 1rem !important;
+            padding: 0.7rem 1rem !important;
             border-radius: 12px !important;
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            color: #4A5568 !important;
-            border: 2px solid rgba(224, 142, 123, 0.25) !important;
-            transition: all 0.3s ease !important;
+            height: 45px !important;
+            margin: 0.1rem 0 !important;
         }
         
-        .stSelectbox select:focus {
-            border-color: #E08E7B !important;
-            box-shadow: 0 0 0 3px rgba(224, 142, 123, 0.15) !important;
+        /* Time inputs - white background with black text */
+        input[type="time"] {
+            background-color: white !important;
+            color: #000000 !important;
+            -webkit-text-fill-color: #000000 !important;
         }
         
-        /* Tabs - bright pastel design */
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 12px;
-            background-color: rgba(255, 255, 255, 0.6) !important;
-            padding: 8px;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stTabs [data-baseweb="tab"] {
-            font-family: 'Poppins', sans-serif !important;
-            font-size: 1.1rem !important;
-            font-weight: 500 !important;
-            color: #9DB4CE !important;
-            background-color: transparent !important;
-            border-radius: 12px !important;
-            padding: 12px 24px !important;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-        
-        .stTabs [data-baseweb="tab"]:hover {
-            background-color: rgba(245, 202, 195, 0.3) !important;
-            color: #E08E7B !important;
-            transform: translateY(-2px) !important;
-        }
-        
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            background: linear-gradient(135deg, #F5CAC3 0%, #E08E7B 100%) !important;
-            color: white !important;
-            box-shadow: 0 4px 12px rgba(224, 142, 123, 0.35) !important;
-        }
-        
-        /* Radio buttons - elegant spacing */
-        .stRadio label {
-            font-size: 1.15rem !important;
-            padding: 0.85rem 1rem !important;
-            margin-bottom: 0.6rem !important;
-            color: #4A5568 !important;
-            border-radius: 10px !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .stRadio label:hover {
-            background-color: rgba(180, 121, 100, 0.08) !important;
-        }
-        
-        /* Chat messages - soft and modern */
-        .stChatMessage {
-            font-size: 1.15rem !important;
-            padding: 1.6rem !important;
-            margin-bottom: 1.2rem !important;
-            border-radius: 18px !important;
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,245,242,0.95) 100%) !important;
-            backdrop-filter: blur(10px) !important;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .stChatMessage:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
-        }
-        
-        /* Mic button styling */
-        button[kind="secondary"],
-        .stButton button[kind="secondary"] {
-            background: linear-gradient(135deg, #FFB6A3 0%, #FF9980 100%) !important; /* Bright coral */
-            color: white !important;
-            border: none !important;
-            font-size: 1.4rem !important;
-            min-height: 52px !important;
-            height: 52px !important;
-            border-radius: 14px !important;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            padding: 0 1.2rem !important;
-            box-shadow: 0 4px 14px rgba(255, 153, 128, 0.35) !important;
-        }
-        
-        button[kind="secondary"]:hover,
-        .stButton button[kind="secondary"]:hover {
-            background: linear-gradient(135deg, #FF9980 0%, #FF7F66 100%) !important;
-            transform: translateY(-3px) scale(1.03) !important;
-            box-shadow: 0 6px 18px rgba(255, 127, 102, 0.45) !important;
-        }
-        
-        /* Metrics - bright display */
-        [data-testid="stMetricValue"] {
-            font-size: 2.2rem !important;
+        /* Form submit buttons - white background with black text */
+        button[kind="formSubmit"],
+        .stButton button[kind="formSubmit"] {
+            background-color: white !important;
+            color: #000000 !important;
+            border: 2px solid #E0E0E0 !important;
             font-weight: 600 !important;
-            color: #E08E7B !important;
-            font-family: 'Poppins', sans-serif !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        button[kind="formSubmit"]:hover,
+        .stButton button[kind="formSubmit"]:hover {
+            background-color: #F5F5F5 !important;
+            border-color: #CCCCCC !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* Chat messages - ULTRA COMPACT */
+        .stChatMessage {
+            font-size: 0.95rem !important;
+            padding: 0.7rem 0.9rem !important;
+            margin-bottom: 0.4rem !important;
+            border-radius: 12px !important;
+            line-height: 1.3 !important;
+        }
+        
+        /* Metrics - COMPACT */
+        [data-testid="stMetricValue"] {
+            font-size: 1.8rem !important;
         }
         
         [data-testid="stMetricLabel"] {
-            font-size: 1.05rem !important;
-            color: #9DB4CE !important;
-            font-weight: 500 !important;
+            font-size: 0.9rem !important;
         }
         
-        /* Cards and containers with smooth transitions */
+        /* Cards and containers - ULTRA COMPACT */
         .element-container {
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease !important;
+            margin-bottom: 0.3rem !important;
         }
         
-        /* Dividers - subtle and elegant */
+        /* Dividers - THIN */
         hr {
-            margin: 2.5rem 0 !important;
+            margin: 0.5rem 0 !important;
             border: none !important;
-            height: 2px !important;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(180, 121, 100, 0.3) 50%, 
-                transparent 100%
-            ) !important;
+            height: 1px !important;
         }
         
-        /* Alert boxes - bright pastel colors */
-        .stSuccess {
-            background: linear-gradient(135deg, #C7EDE0 0%, #B0E0D0 100%) !important; /* Bright mint */
-            color: #2D6E5E !important;
-            border-left: 4px solid #5FCCA8 !important;
+        /* Alert boxes - compact */
+        .stSuccess, .stInfo, .stWarning, .stError {
+            font-size: 0.95rem !important;
+            padding: 0.8rem 1rem !important;
+            border-radius: 10px !important;
+            margin: 0.3rem 0 !important;
+        }
+        
+        /* Summary cards - COMPACT */
+        .summary-card {
+            padding: 1rem !important;
+            border-radius: 12px !important;
+            height: 150px !important;
+            margin: 0.2rem 0 !important;
+        }
+        
+        .card-header {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .card-metric {
+            font-size: 2.5rem !important;
+            margin: 0.2rem 0 !important;
+        }
+        
+        /* Event list - COMPACT */
+        .event-item {
+            padding: 0.6rem 0.8rem !important;
+            margin-bottom: 0.3rem !important;
+            border-radius: 8px !important;
+        }
+        
+        .event-time {
+            font-size: 0.9rem !important;
+            margin-bottom: 0.1rem !important;
+        }
+        
+        .event-title {
+            font-size: 0.95rem !important;
+            margin-bottom: 0.1rem !important;
+        }
+        
+        /* Conversation cards - COMPACT */
+        .conversation-card {
+            padding: 0.7rem 0.9rem !important;
+            margin-bottom: 0.4rem !important;
+            border-radius: 10px !important;
+        }
+        
+        /* Section headers - COMPACT */
+        .section-header {
+            margin: 0.5rem 0 0.3rem 0 !important;
+            padding-bottom: 0.2rem !important;
+        }
+        
+        /* Quick action buttons - COMPACT */
+        .quick-actions-row {
+            gap: 0.3rem !important;
+            margin: 0.3rem 0 !important;
+        }
+        
+        .quick-action-btn {
+            min-height: 50px !important;
+            font-size: 0.8rem !important;
+            padding: 0.4rem 0.3rem !important;
+        }
+        
+        /* Input area - COMPACT */
+        .input-area {
+            padding: 0.5rem 0 !important;
+            margin-top: 0.3rem !important;
+        }
+        
+        /* Remove all column padding */
+        div[data-testid="column"] {
+            padding: 0 0.2rem !important;
+        }
+        
+        /* Vertical block spacing optimization */
+        [data-testid="stVerticalBlock"] > div {
+            gap: 0.2rem !important;
+        }
+        
+        /* Remove excessive padding from markdown containers */
+        [data-testid="stMarkdownContainer"] {
+            padding: 0 !important;
+        }
+        
+        /* Optimize expander spacing */
+        .streamlit-expanderHeader {
+            padding: 0.4rem 0.8rem !important;
+            font-size: 0.95rem !important;
+        }
+        
+        .streamlit-expanderContent {
+            padding: 0.6rem 0.8rem !important;
+        }
+        
+        /* Dataframe compact styling */
+        .dataframe {
+            font-size: 0.85rem !important;
+        }
+        
+        .dataframe th {
+            padding: 0.3rem !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .dataframe td {
+            padding: 0.2rem 0.3rem !important;
+        }
+        
+        /* Reduce spacing in forms */
+        .stForm {
+            padding: 0.5rem !important;
+        }
+        
+        /* Compact tabs */
+        .stTabs [data-baseweb="tab-panel"] {
+            padding-top: 0.5rem !important;
+        }
+        
+        /* Optimize image containers */
+        [data-testid="stImage"] {
+            margin: 0.3rem 0 !important;
+        }
+        
+        /* Reduce spacing in alerts */
+        .stAlert {
+            padding: 0.6rem 0.8rem !important;
+            margin: 0.3rem 0 !important;
+        }
+        
+        /* Compact download buttons */
+        .stDownloadButton button {
+            padding: 0.4rem 0.8rem !important;
+            min-height: 40px !important;
+        }
+        
+        /* Optimize checkbox and radio spacing */
+        .stCheckbox, .stRadio {
+            margin-bottom: 0.2rem !important;
+        }
+        
+        /* Compact date/time inputs */
+        .stDateInput, .stTimeInput {
+            margin-bottom: 0.3rem !important;
+        }
+        
+        /* Text area optimization */
+        .stTextArea textarea {
+            line-height: 1.3 !important;
+            padding: 0.6rem !important;
+        }
+        
+        /* Number input compact */
+        .stNumberInput input {
+            padding: 0.4rem 0.6rem !important;
+            height: 40px !important;
+        }
+        
+        /* File uploader compact */
+        .stFileUploader {
+            padding: 0.5rem !important;
+        }
+        
+        /* Slider spacing */
+        .stSlider {
+            padding: 0.3rem 0 !important;
+        }
+        
+        /* Progress bar compact */
+        .stProgress {
+            margin: 0.3rem 0 !important;
+        }
+        
+        /* Spinner compact */
+        .stSpinner {
+            margin: 0.5rem 0 !important;
+        }
+        
+        /* Empty state styling - compact */
+        .empty-state {
+            padding: 1.5rem 1.5rem !important;
+        }
+        
+        .empty-state-icon {
+            font-size: 2.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .empty-state-title {
             font-size: 1.1rem !important;
-            padding: 1.2rem 1.6rem !important;
-            border-radius: 14px !important;
-            box-shadow: 0 4px 12px rgba(95, 204, 168, 0.25) !important;
+            margin-bottom: 0.3rem !important;
         }
         
-        .stInfo {
-            background: linear-gradient(135deg, #D4E8F5 0%, #B4D7E0 100%) !important; /* Bright sky blue */
-            color: #FFFFFF !important;
-            border-left: 4px solid #9DB4CE !important;
-            font-size: 1.1rem !important;
-            padding: 1.2rem 1.6rem !important;
-            border-radius: 14px !important;
-            box-shadow: 0 4px 12px rgba(157, 180, 206, 0.3) !important;
+        /* Card grid system for better layout */
+        .card-grid {
+            gap: 0.5rem !important;
+            margin-bottom: 0.8rem !important;
         }
         
-        .stWarning {
-            background: linear-gradient(135deg, #FFE8D6 0%, #FFD9B8 100%) !important; /* Bright peach */
-            color: #A0662F !important;
-            border-left: 4px solid #FFB380 !important;
-            font-size: 1.1rem !important;
-            padding: 1.2rem 1.6rem !important;
-            border-radius: 14px !important;
-            box-shadow: 0 4px 12px rgba(255, 179, 128, 0.25) !important;
+        /* Status badges - COMPACT */
+        .status-badge {
+            padding: 0.1rem 0.4rem !important;
+            font-size: 0.7rem !important;
+            margin-left: 0.2rem !important;
         }
         
-        .stError {
-            background: linear-gradient(135deg, #FFD6D6 0%, #FFB8B8 100%) !important; /* Bright pink-red */
-            color: #C04040 !important;
-            border-left: 4px solid #FF8080 !important;
-            font-size: 1.1rem !important;
-            padding: 1.2rem 1.6rem !important;
-            border-radius: 14px !important;
-            box-shadow: 0 4px 12px rgba(255, 128, 128, 0.25) !important;
+        /* Grid layouts - COMPACT */
+        .grid-container {
+            gap: 0.4rem !important;
         }
         
-        /* Remove dark theme artifacts */
-        .stApp [data-testid="stHeader"] {
-            background-color: transparent !important;
-        }
-        
-        /* Sentiment colors - bright palette */
-        .positive-sentiment {
-            color: #5FCCA8 !important; /* Bright mint green */
-            font-weight: 600;
-        }
-        
-        .negative-sentiment {
-            color: #FF9980 !important; /* Bright coral */
-            font-weight: 600;
-        }
-        
-        .neutral-sentiment {
-            color: #9DB4CE !important; /* Bright periwinkle */
-            font-weight: 500;
-        }
-        
-        /* Smooth scrollbar - bright colors */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #F5CAC3 0%, #E08E7B 100%);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #FFB6A3 0%, #FF9980 100%);
+        /* Caption text - SMALLER */
+        .caption, [data-testid="stCaption"] {
+            font-size: 0.75rem !important;
+            margin-top: 0.1rem !important;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -462,208 +563,97 @@ def run_dashboard():
 
     # Sidebar for user selection and navigation
     with st.sidebar:
-        # Add CSS to fix sidebar width and reduce spacing
+        # Display custom logo
+        st.image("Logo.png", use_container_width=True)
+        
+        # Navigation with proper styling
         st.markdown("""
             <style>
-            /* Fix sidebar width - disable resizing */
-            [data-testid="stSidebar"] {
-                width: 320px !important;
-                min-width: 320px !important;
-                max-width: 320px !important;
-                overflow-y: hidden !important;
-                padding-top: 0 !important;
-            }
-            
-            [data-testid="stSidebar"] > div:first-child {
-                width: 320px !important;
-                min-width: 320px !important;
-                max-width: 320px !important;
-                overflow-y: hidden !important;
-                padding-top: 0 !important;
-            }
-            
-            /* Hide resize handle and sidebar header */
-            [data-testid="stSidebar"] button[kind="header"] {
-                display: none !important;
-            }
-            
-            [data-testid="stSidebarNav"] {
-                display: none !important;
-            }
-            
-            /* Aggressive removal of all top spacing */
-            section[data-testid="stSidebar"] {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-            }
-            
-            section[data-testid="stSidebar"] > div {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-            }
-            
-            section[data-testid="stSidebar"] > div > div:first-child {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-                border-top: none !important;
-            }
-            
-            [data-testid="stSidebar"] > div {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-                border-top: none !important;
-            }
-            
-            [data-testid="stSidebar"] .block-container {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-            }
-            
-            /* Remove spacing from first element container */
-            [data-testid="stSidebar"] .element-container:first-child {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-            }
-            
-            /* Remove any borders at the top */
-            [data-testid="stSidebar"]::before,
-            [data-testid="stSidebar"] > div::before {
-                display: none !important;
-            }
-            
-            /* Center sidebar vertically with wrapper */
-            section[data-testid="stSidebar"] {
-                display: flex !important;
-                align-items: center !important;
-            }
-            
-            /* Add balanced padding to sidebar content - keep content together */
-            [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
-                padding-top: 1.5rem !important;
-                padding-bottom: 1.5rem !important;
-            }
-            
-            /* Reduce all sidebar spacing */
-            [data-testid="stSidebar"] .element-container {
-                margin-bottom: 0 !important;
-                padding-bottom: 0 !important;
-            }
-            
-            [data-testid="stSidebar"] .stSelectbox {
-                margin-top: 0.2rem !important;
-                margin-bottom: 0.2rem !important;
-            }
-            
-            /* Vertically center selectbox content */
-            [data-testid="stSidebar"] .stSelectbox > div > div {
-                display: flex !important;
-                align-items: center !important;
-            }
-            
-            [data-testid="stSidebar"] .stSelectbox select {
-                display: flex !important;
-                align-items: center !important;
-            }
-            </style>
-        """, unsafe_allow_html=True)
-        
-        logo_path = r"c:\Users\duvvu\Downloads\Logo.png"
-        if os.path.exists(logo_path):
-            logo = Image.open(logo_path)
-            st.image(logo, use_container_width=True)
-            st.markdown("<div style='margin: 1.5rem 0;'></div>", unsafe_allow_html=True)
-        
-        st.markdown("<h3 style='margin-bottom: 0.1rem; margin-top: 0; font-size: 1.4rem; display: flex; align-items: center;'>👤 User</h3>", unsafe_allow_html=True)
-        users = UserCRUD.get_all_users()
-
-        if not users:
-            st.error("No users found. Please add users first.")
-            show_user_management()
-            return
-
-        user_options = {
-            f"{user.name}": user.id
-            for user in users
-        }
-        selected_user_key = st.selectbox("",
-                                         list(user_options.keys()),
-                                         label_visibility="collapsed")
-        selected_user_id = user_options[selected_user_key]
-
-        st.markdown("<div style='margin: 1.2rem 0;'></div>", unsafe_allow_html=True)
-
-        st.markdown("<h3 style='margin-bottom: 0.2rem; margin-top: 0; font-size: 1.4rem; display: flex; align-items: center;'>📱 Navigation</h3>", unsafe_allow_html=True)
-        
-        # Add custom CSS for navigation tabs with boundaries
-        st.markdown("""
-            <style>
-            /* Style radio buttons as tabs with uniform dimensions */
+            /* Fix navigation buttons to prevent text wrapping */
             div[role="radiogroup"] {
-                gap: 0.4rem !important;
+                gap: 0.3rem !important;
+                width: 100% !important;
             }
             
             div[role="radiogroup"] label {
                 border: 2px solid #E0E0E0 !important;
                 border-radius: 10px !important;
-                padding: 0.5rem 0.75rem !important;
+                padding: 0.8rem 0.6rem !important;
                 margin-bottom: 0.3rem !important;
                 background: white !important;
-                transition: all 0.3s ease !important;
+                min-height: 50px !important;
+                height: auto !important;
                 display: flex !important;
                 align-items: center !important;
+                justify-content: flex-start !important;
                 width: 100% !important;
-                min-height: 42px !important;
+                position: relative !important;
             }
             
+            /* Hide the default text that appears outside */
             div[role="radiogroup"] label div {
                 display: flex !important;
                 align-items: center !important;
-                gap: 0.5rem !important;
-                line-height: 1 !important;
+                gap: 0.6rem !important;
             }
             
             div[role="radiogroup"] label div p {
+                display: inline-block !important;
+                font-size: 1rem !important;
+                font-weight: 500 !important;
+                color: #2C3E50 !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                line-height: 1.2 !important;
-                display: inline-flex !important;
-                align-items: center !important;
+                white-space: nowrap !important;
             }
             
-            /* Align radio button circles with text */
+            /* Radio button circles */
             div[role="radiogroup"] label input[type="radio"] {
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-                margin-right: 0.5rem !important;
-                align-self: center !important;
+                margin-right: 0.6rem !important;
+                flex-shrink: 0 !important;
             }
             
+            /* Hover state */
             div[role="radiogroup"] label:hover {
                 border-color: #FF8C69 !important;
                 background: #FFF5F2 !important;
                 transform: translateX(3px);
             }
             
+            /* Selected state */
             div[role="radiogroup"] label[data-checked="true"] {
                 border-color: #FF8C69 !important;
                 background: linear-gradient(135deg, #FFF5F2 0%, #FFE8E0 100%) !important;
-                font-weight: 600 !important;
                 box-shadow: 0 2px 8px rgba(255, 140, 105, 0.2);
             }
             
-            /* Remove extra spacing in radiogroup */
-            [data-testid="stSidebar"] [data-testid="stVerticalBlock"] > div {
-                gap: 0 !important;
+            div[role="radiogroup"] label[data-checked="true"] p {
+                color: #FF8C69 !important;
+                font-weight: 600 !important;
+            }
+            
+            /* Ensure sidebar has enough width */
+            [data-testid="stSidebar"] {
+                min-width: 280px !important;
             }
             </style>
         """, unsafe_allow_html=True)
         
-        page = st.radio("",
-                       [
-                           "🏠 Overview", "💬 Chat with Carely", "💊 Medications",
-                           "📊 Health Insights"  # , "🚨 Alerts & Reminders"  # Commented out for now
-                       ],
-                       label_visibility="collapsed")
+        # Navigation options
+        page = st.radio(
+            "Navigate to:",
+            [
+                "🏠 Overview",
+                "💬 Chat with Carely", 
+                "💊 Medications",
+                "📊 Health Insights"
+            ],
+            label_visibility="collapsed",
+            key="main_navigation"
+        )
+    
+    # Get user_id from session state
+    selected_user_id = st.session_state.get('user_id', 1)  # Default to 1 if not set
 
     # Main content based on selected page
     if page == "🏠 Overview":
@@ -674,50 +664,32 @@ def run_dashboard():
         show_medication_management(selected_user_id)
     elif page == "📊 Health Insights":
         show_health_insights(selected_user_id)
-    # elif page == "🚨 Alerts & Reminders":  # Commented out for now
-    #     show_alerts_and_reminders(selected_user_id)
 
 
 def get_daily_affirmation() -> str:
-    """
-    Generate ONE positive affirmation for the day using AI.
-    Same affirmation is shown for the entire day (cached by date).
-    
-    Returns:
-        Short positive affirmation (under 20 words)
-    """
-    # Get current date to use as cache key
+    """Generate ONE positive affirmation for the day using AI."""
+    # ... (keep existing implementation, it's already compact)
     current_date = now_central().strftime('%Y-%m-%d')
     
-    # Check if we already have today's affirmation in session state
     if 'daily_affirmation' not in st.session_state:
         st.session_state.daily_affirmation = {}
     
-    # If we have today's affirmation, return it
     if current_date in st.session_state.daily_affirmation:
         return st.session_state.daily_affirmation[current_date]
     
-    # Fallback affirmations in case AI fails
     fallback_affirmations = [
         "Today is a fresh start. You are doing wonderfully.",
         "Your presence brings joy to those around you.",
         "Each small step you take matters. You're doing great.",
         "You are valued, loved, and appreciated every day.",
         "Your wisdom and kindness make a real difference.",
-        "Today brings new moments to cherish and enjoy.",
-        "You've overcome so much. Keep being amazing.",
-        "Your smile lights up the room. Share it today.",
-        "Every day with you is a blessing to others.",
-        "You are stronger and braver than you know."
     ]
     
     try:
-        # Use Groq to generate a personalized affirmation
         from groq import Groq
         groq_api_key = os.getenv("GROQ_API_KEY")
         
         if not groq_api_key:
-            # No API key, use fallback
             import random
             affirmation = random.choice(fallback_affirmations)
         else:
@@ -725,71 +697,43 @@ def get_daily_affirmation() -> str:
             
             response = client.chat.completions.create(
                 model="llama-3.1-8b-instant",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a caring companion for seniors. Generate ONE short, positive affirmation."
-                    },
-                    {
-                        "role": "user",
-                        "content": """Generate ONE positive affirmation for today.
-                        
-Guidelines:
-- Keep it under 20 words
-- Use simple, gentle language
-- Avoid clichés or overly spiritual tones
-- Make it caring and encouraging
-- Suitable for seniors
-- Don't use quotes or special formatting
-
-Just give me the affirmation, nothing else."""
-                    }
-                ],
+                messages=[{
+                    "role": "system",
+                    "content": "You are a caring companion for seniors. Generate ONE short, positive affirmation."
+                }, {
+                    "role": "user",
+                    "content": "Generate ONE positive affirmation for today. Keep it under 20 words, use simple language."
+                }],
                 temperature=0.8,
                 max_tokens=50
             )
             
             affirmation = response.choices[0].message.content.strip()
-            
-            # Remove quotes if AI added them
             affirmation = affirmation.strip('"').strip("'")
             
-            # Validate length (should be under 20 words)
             if len(affirmation.split()) > 20:
                 import random
                 affirmation = random.choice(fallback_affirmations)
     
-    except Exception as e:
-        # If anything fails, use fallback
+    except Exception:
         import random
         affirmation = random.choice(fallback_affirmations)
     
-    # Cache today's affirmation
     st.session_state.daily_affirmation[current_date] = affirmation
-    
     return affirmation
 
 
 def get_upcoming_events_for_overview(user_id: int) -> List[Dict[str, Any]]:
-    """
-    Get the next 10 upcoming personal events from the database.
-    Automatically refreshes based on current date/time.
-    
-    Returns:
-        List of next 10 events sorted by datetime with formatted display strings
-    """
+    """Get the next 10 upcoming personal events from the database."""
+    # ... (keep existing implementation)
     events = []
-    
-    # Get current time in Central Time
     current_time = now_central()
     
-    # === PERSONAL EVENTS ===
     try:
         from app.database.models import PersonalEvent, get_session
         from sqlmodel import select
         
         with get_session() as session:
-            # Query all future events for this user
             query = select(PersonalEvent).where(
                 PersonalEvent.user_id == user_id,
                 PersonalEvent.event_date.isnot(None)
@@ -797,24 +741,15 @@ def get_upcoming_events_for_overview(user_id: int) -> List[Dict[str, Any]]:
             personal_events = session.exec(query).all()
             
             for event in personal_events:
-                # Convert to Central Time
                 event_time = to_central(event.event_date)
                 
-                # Only include future events (from current time onwards)
                 if event_time >= current_time:
-                    # Determine if it's recurring
                     is_recurring = event.recurring if hasattr(event, 'recurring') else False
                     
-                    # Map event type to emoji
                     emoji_map = {
-                        'appointment': '📅',
-                        'medication': '💊',
-                        'birthday': '🎂',
-                        'family_event': '👨‍👩‍👧‍👦',
-                        'hobby': '🎨',
-                        'achievement': '🏆',
-                        'health': '🏥',
-                        'social': '👥'
+                        'appointment': '📅', 'medication': '💊', 'birthday': '🎂',
+                        'family_event': '👨‍👩‍👧‍👦', 'hobby': '🎨', 'achievement': '🏆',
+                        'health': '🤖', 'social': '👥'
                     }
                     emoji = emoji_map.get(event.event_type, '📌')
                     
@@ -828,113 +763,126 @@ def get_upcoming_events_for_overview(user_id: int) -> List[Dict[str, Any]]:
                         'type': event.event_type,
                         'is_recurring': is_recurring
                     })
-    except Exception as e:
-        # Silently fail if there's an error fetching personal events
+    except Exception:
         pass
     
-    # Sort events by datetime and take only the next 10
     events.sort(key=lambda x: x['datetime'])
-    
-    return events[:10]  # Return only the next 10 upcoming events
+    return events[:10]
 
 
 def show_overview(user_id: int):
-    """Show overview dashboard"""
+    """Show overview dashboard with optimized spacing"""
     user = UserCRUD.get_user(user_id)
     if not user:
         st.error("User not found")
         return
     
-    # Add CSS to remove top spacing on Overview page
-    st.markdown("""
-        <style>
-        /* Force remove ALL top spacing from main content */
-        .main .block-container,
-        [data-testid="stAppViewContainer"] .main .block-container,
-        section.main > div,
-        .block-container {
-            padding-top: 0rem !important;
-            margin-top: 0rem !important;
-        }
-        
-        /* Remove spacing from element containers */
-        .main .element-container:first-child {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        
-        /* Remove gap from vertical blocks */
-        .main [data-testid="stVerticalBlock"]:first-child {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
     # Get current time in Central Time for display
     current_time = now_central()
-    current_day = current_time.strftime("%A")  # e.g., "Saturday"
-    current_date = current_time.strftime("%B %d, %Y")  # e.g., "November 1, 2025"
-    current_time_str = current_time.strftime("%I:%M %p %Z")  # e.g., "08:15 PM CST"
+    current_day = current_time.strftime("%A")
+    current_date = current_time.strftime("%B %d, %Y")
+    current_time_str = current_time.strftime("%I:%M %p %Z")
     
-    # Page header without logo - very tight spacing with increased negative margin
-    st.markdown(f"""
-        <div style='padding: 0; margin: -5rem 0 0 0; margin-bottom: 0;'>
-            <h1 style='margin: 0; padding: 0; color: #E08E7B; font-size: 2rem;'>Carely: Your AI Companion</h1>
-            <p style='margin: 0.2rem 0 0 0; font-size: 1.1rem; color: #9DB4CE; font-style: italic;'>Your caring companion, always here for you</p>
-            <p style='margin: 0.3rem 0 0 0; font-size: 0.95rem; color: #D4A5A5;'>📅 {current_day}, {current_date} • 🕐 {current_time_str}</p>
-            <h2 style='margin: 0.5rem 0 0.2rem 0; color: #4A5568; font-size: 1.5rem;'>👋 Hello, {user.name}!</h2>
-            <p style='margin: 0; font-size: 1rem; color: #9DB4CE; font-weight: 500;'>Here's your summary for today</p>
+    # MODERN HEADER WITH CALM/HEADSPACE INSPIRED GRADIENT
+    st.markdown("""
+        <div style='background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+                    text-align: center; 
+                    margin: -1rem -1rem 1.5rem -1rem; 
+                    padding: 2.5rem 1rem 2rem 1rem;
+                    border-radius: 0 0 24px 24px;
+                    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);'>
+            <h1 style='margin: 0; padding: 0; 
+                       color: #FFFFFF; 
+                       font-size: 2.8rem; 
+                       font-weight: 700; 
+                       font-family: Poppins, sans-serif; 
+                       line-height: 1.2;
+                       letter-spacing: -0.5px;
+                       text-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+                🌿 Carely: Your Wellness Companion
+            </h1>
+            <h2 style='margin: 0.6rem 0 0 0; 
+                      font-size: 3.5rem; 
+                      color: #FFB6C1; 
+                      font-style: normal; 
+                      font-family: Inter, sans-serif; 
+                      line-height: 1.5;
+                      font-weight: 500;'>
+                Supporting your health journey, every step of the way ❤️
+            </h2>
         </div>
     """, unsafe_allow_html=True)
-
-    st.markdown("<div style='margin: 0.5rem 0;'></div>", unsafe_allow_html=True)
     
-    # Remove default Streamlit padding from columns and fix alignment
-    st.markdown("""
-        <style>
-        /* Remove all padding from columns */
-        div[data-testid="column"] {
-            padding: 0 !important;
-        }
-        
-        div[data-testid="column"] > div {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        div[data-testid="stVerticalBlock"] > div {
-            gap: 0 !important;
-        }
-        
-        /* Remove padding from markdown containers inside columns */
-        div[data-testid="column"] .element-container {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        div[data-testid="column"] .stMarkdown {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    # Today's summary cards with better styling
-    col1, col2, col3 = st.columns(3)
+    # ENHANCED WELCOME AND DATE/TIME SECTION
+    header_col1, header_col2 = st.columns([1.4, 1])
+    
+    with header_col1:
+        welcome_html = f"""
+<div style="background: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 100%); padding: 1.5rem 1.8rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 2px solid rgba(45, 156, 219, 0.15); min-height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+        <span style="font-size: 2.5rem;">👋</span>
+        <div>
+            <h2 style="margin: 0; color: #2D3436; font-size: 1.8rem; font-weight: 700; font-family: Poppins, sans-serif; line-height: 1.2;">
+                Hello, <span style="color: #2D9CDB; font-weight: 800;">{user.name}</span>!
+            </h2>
+            <p style="margin: 0.3rem 0 0 0; font-size: 1.6rem; color: #636E72; font-family: Inter, sans-serif; font-weight: 500;">
+                Welcome back to Carely!.
+            </p>
+        </div>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(45, 156, 219, 0.12) 0%, rgba(78, 205, 196, 0.08) 100%); padding: 1rem 1.3rem; border-radius: 12px; border: 1.5px solid rgba(45, 156, 219, 0.2); box-shadow: 0 2px 8px rgba(45, 156, 219, 0.1);">
+        <div style="display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.6rem;">
+            <span style="font-size: 1.3rem;">📅</span>
+            <div style="font-size: 1.05rem; font-weight: 700; color: #2D9CDB; font-family: Poppins, sans-serif; letter-spacing: 0.2px;">
+                {current_day}, {current_date}
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.7rem; padding-left: 0.2rem;">
+            <span style="font-size: 1.1rem;">🕐</span>
+            <div style="font-size: 0.95rem; color: #27AE60; font-weight: 600; font-family: Inter, sans-serif;">
+                {current_time_str}
+            </div>
+        </div>
+    </div>
+</div>
+"""
+        st.markdown(welcome_html, unsafe_allow_html=True)
+    
+    with header_col2:
+        daily_thought = get_daily_affirmation()
+        inspiration_html = f"""
+<div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0E0 100%); padding: 1.2rem 1.5rem; border-radius: 16px; min-height: 220px; box-shadow: 0 4px 16px rgba(255, 182, 140, 0.2); border: 2px solid rgba(255, 107, 107, 0.15); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="position: absolute; top: 0.5rem; right: 0.8rem; font-size: 3rem; color: rgba(255, 107, 107, 0.08); font-family: Georgia, serif; line-height: 1;">
+        "
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; position: relative; z-index: 1;">
+        <span style="font-size: 1.5rem;">✨</span>
+        <span style="font-size: 1.35rem; font-weight: 700; color: #2D3436; font-family: Poppins, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">
+            Daily Inspiration
+        </span>
+        <span style="font-size: 1.3rem; margin-left: auto;">🍴</span>
+    </div>
+    <div style="font-size: 1.45rem; line-height: 1.5; font-style: italic; color: #2D3436; font-family: Georgia, serif; font-weight: 500; position: relative; z-index: 1; text-shadow: 0 1px 2px rgba(255,255,255,0.5); padding: 0.3rem 0;">
+        "{daily_thought}"
+    </div>
+    <div style="position: absolute; bottom: 0.5rem; left: 0.8rem; font-size: 3rem; color: rgba(255, 107, 107, 0.08); font-family: Georgia, serif; line-height: 1; transform: rotate(180deg);">
+        "
+    </div>
+</div>
+"""
+        st.markdown(inspiration_html, unsafe_allow_html=True)
+    
+    st.markdown("<div style='margin: 1rem 0;'></div>", unsafe_allow_html=True)
+    
+    # Today's summary cards - compact layout
+    col1, col2 = st.columns(2)
 
     with col1:
-        # Medication adherence today - Count all scheduled doses for the day
-        from datetime import datetime as dt, time as dt_time
-        
-        # Get current time in Central Time
+        # Medication adherence today
         current_time = now_central()
-        current_time_only = current_time.time()
-        
-        # Get all medications FOR THIS USER ONLY
         medications = MedicationCRUD.get_user_medications(user_id)
         
-        total_doses_scheduled = 0  # Total doses scheduled for entire day
+        total_doses_scheduled = 0
         doses_taken = 0
         
         for med in medications:
@@ -945,258 +893,292 @@ def show_overview(user_id: int):
                 schedule_times = json.loads(med.schedule_times) if isinstance(med.schedule_times, str) else med.schedule_times
                 
                 for scheduled_time_str in schedule_times:
-                    # Parse the scheduled time
-                    scheduled_time = dt.strptime(scheduled_time_str, "%H:%M").time()
-                    
-                    # Count ALL scheduled doses for the day (not just ones that are due)
                     total_doses_scheduled += 1
-                    
-                    # Check if this dose was logged as taken today
-                    scheduled_datetime = dt.combine(current_time.date(), scheduled_time)
+                    scheduled_time = datetime.strptime(scheduled_time_str, "%H:%M").time()
+                    scheduled_datetime = datetime.combine(current_time.date(), scheduled_time)
                     scheduled_datetime_central = to_central(scheduled_datetime)
                     
-                    # Get TODAY's medication logs for this user and medication
                     today_logs = MedicationLogCRUD.get_today_medication_logs(
                         user_id=user_id,
                         medication_id=med.id
                     )
                     
-                    # Check if any log matches this scheduled dose
-                    # For medications taken once daily, any log today counts
-                    # For multiple doses per day, match within 4 hours window
                     for log in today_logs:
                         if log.status != "taken":
                             continue
                         
-                        # Use taken_time for comparison (when it was actually logged)
                         log_time = to_central(log.taken_time) if log.taken_time else to_central(log.scheduled_time)
-                        
-                        # Check if log matches this scheduled time
                         log_minutes = log_time.hour * 60 + log_time.minute
                         scheduled_minutes = scheduled_time.hour * 60 + scheduled_time.minute
                         
-                        # If medication is once daily, accept any time today
-                        # If multiple times daily, check within 4 hours (240 minutes)
                         if len(schedule_times) == 1:
-                            # Single dose per day - any log today counts
                             doses_taken += 1
                             break
                         else:
-                            # Multiple doses per day - match within 4 hours window
                             if abs(log_minutes - scheduled_minutes) <= 240:
                                 doses_taken += 1
                                 break
-            except Exception as e:
+            except Exception:
                 continue
         
-        # Calculate adherence rate based on total scheduled doses
         adherence_rate = (doses_taken / total_doses_scheduled * 100) if total_doses_scheduled > 0 else 0
         
-        # Bright pastel colors
-        color = "#5FCCA8" if adherence_rate >= 80 else "#FFB6A3" if adherence_rate >= 50 else "#FFD6A0"
-        st.markdown("""
-            <div style='background: {}; 
-                        padding: 0; 
-                        margin: 0;
-                        border-radius: 15px; 
-                        color: white; 
-                        height: 200px;
-                        display: flex !important; 
-                        flex-direction: column !important; 
-                        justify-content: center !important; 
-                        align-items: center !important; 
-                        text-align: center !important;
-                        box-sizing: border-box !important;'>
-                <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
-                    <h3 style='color: #8B4513 !important; margin: 0 0 0.8rem 0; padding: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.2;'>💊 Medications</h3>
-                    <h2 style='color: #5A2E0E !important; margin: 0 0 0.6rem 0; padding: 0; font-size: 3.5rem; line-height: 1; font-weight: 700;'>{}%</h2>
-                    <p style='color: #8B4513 !important; margin: 0; padding: 0; font-size: 0.95rem; line-height: 1.2;'>{}/{} doses taken</p>
-                </div>
-            </div>
-        """.format(color, int(adherence_rate), doses_taken, total_doses_scheduled), unsafe_allow_html=True)
-
-    with col2:
-        # Recent mood
-        conversations = ConversationCRUD.get_recent_sentiment_data(user_id, days=1)
-        if conversations:
-            # Filter conversations with valid sentiment scores
-            valid_sentiments = [c.sentiment_score for c in conversations if c.sentiment_score is not None]
-            
-            if valid_sentiments:  # Only calculate if there are valid scores
-                avg_mood = sum(valid_sentiments) / len(valid_sentiments)
-                mood_emoji = get_sentiment_emoji(avg_mood)
-                # Bright pastel mood colors
-                mood_color = "#B4D7E0" if avg_mood > 0.3 else "#FFD9B8" if avg_mood > -0.3 else "#FFB8B8"
-                st.markdown("""
-                    <div style='background: {}; 
-                                padding: 0; 
-                                margin: 0;
-                                border-radius: 15px; 
-                                color: white; 
-                                height: 200px;
-                                display: flex !important; 
-                                flex-direction: column !important; 
-                                justify-content: center !important; 
-                                align-items: center !important; 
-                                text-align: center !important;
-                                box-sizing: border-box !important;'>
-                        <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
-                            <h3 style='color: #2C6B7D !important; margin: 0 0 0.8rem 0; padding: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.2;'>&#128154; Mood</h3>
-                            <h2 style='color: #1A4A58 !important; margin: 0 0 0.6rem 0; padding: 0; font-size: 3.5rem; line-height: 1; font-weight: 700;'>{} {:.2f}</h2>
-                            <p style='color: #2C6B7D !important; margin: 0; padding: 0; opacity: 0; font-size: 0.95rem; line-height: 1.2; visibility: hidden;'>placeholder</p>
-                        </div>
-                    </div>
-                """.format(mood_color, mood_emoji, avg_mood), unsafe_allow_html=True)
-            else:
-                # Conversations exist but no sentiment scores
-                st.markdown("""
-                    <div style='background: #E0D0E0; 
-                                padding: 0; 
-                                margin: 0;
-                                border-radius: 15px; 
-                                color: white; 
-                                height: 200px;
-                                display: flex !important; 
-                                flex-direction: column !important; 
-                                justify-content: center !important; 
-                                align-items: center !important; 
-                                text-align: center !important;
-                                box-sizing: border-box !important;'>
-                        <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
-                            <h3 style='color: #6B4C6B !important; margin: 0 0 0.8rem 0; padding: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.2;'>&#128154; Mood</h3>
-                            <h2 style='color: #4A2E4A !important; margin: 0 0 0.6rem 0; padding: 0; font-size: 3.5rem; line-height: 1; font-weight: 700;'>No data</h2>
-                            <p style='color: #6B4C6B !important; margin: 0; padding: 0; opacity: 0; font-size: 0.95rem; line-height: 1.2; visibility: hidden;'>placeholder</p>
-                        </div>
-                    </div>
-                """, unsafe_allow_html=True)
+        # COLOR CODED RECTANGULAR BOX - MyFitnessPal inspired traffic light system
+        if adherence_rate >= 80:
+            bg_color = "linear-gradient(135deg, #A8E6CF 0%, #7DCEA0 100%)"  # Success green gradient
+            text_color = "#FFFFFF"
+            status_emoji = "✅"
+            status_text = "Excellent!"
+        elif adherence_rate >= 50:
+            bg_color = "linear-gradient(135deg, #FFE8B8 0%, #FFD89C 100%)"  # Warning yellow gradient
+            text_color = "#8B5A00"
+            status_emoji = "⚠️"
+            status_text = "Keep it up"
         else:
-            st.markdown("""
-                <div style='background: #E0D0E0; 
-                            padding: 0; 
-                            margin: 0;
-                            border-radius: 15px; 
-                            color: white; 
-                            height: 200px;
-                            display: flex !important; 
-                            flex-direction: column !important; 
-                            justify-content: center !important; 
-                            align-items: center !important; 
-                            text-align: center !important;
-                            box-sizing: border-box !important;'>
-                    <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
-                        <h3 style='color: #6B4C6B !important; margin: 0 0 0.8rem 0; padding: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.2;'>&#128154; Mood</h3>
-                        <h2 style='color: #4A2E4A !important; margin: 0 0 0.6rem 0; padding: 0; font-size: 3.5rem; line-height: 1; font-weight: 700;'>No data</h2>
-                        <p style='color: #6B4C6B !important; margin: 0; padding: 0; opacity: 0; font-size: 0.95rem; line-height: 1.2; visibility: hidden;'>placeholder</p>
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
-
-    with col3:
-        # Daily Thought/Affirmation
-        daily_thought = get_daily_affirmation()
+            bg_color = "linear-gradient(135deg, #FFB8B8 0%, #FF9999 100%)"  # Alert red gradient
+            text_color = "#FFFFFF"
+            status_emoji = "💊"
+            status_text = "Needs attention"
+        
         st.markdown(f"""
-            <div style='background: linear-gradient(135deg, #E8D5F2 0%, #D5C4E8 100%); 
-                        padding: 0; 
-                        margin: 0;
-                        border-radius: 15px; 
-                        color: white; 
-                        height: 200px;
-                        display: flex !important; 
-                        flex-direction: column !important; 
-                        justify-content: center !important; 
-                        align-items: center !important; 
-                        text-align: center !important;
-                        box-sizing: border-box !important;'>
-                <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
-                    <h3 style='color: #7B5B8B !important; margin: 0 0 0.8rem 0; padding: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.2; white-space: nowrap;'>✨ Today's Thought</h3>
-                    <p style='color: #5A3C6A !important; margin: 0; padding: 0 1rem; font-size: 1rem; line-height: 1.4; font-style: italic; font-weight: 500;'>"{daily_thought}"</p>
+            <div style='background: {bg_color}; color: {text_color}; padding: 1.2rem 1rem; border-radius: 12px; height: 150px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;'>
+                <div style='display: flex; justify-content: space-between; align-items: flex-start;'>
+                    <span style='font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.9; line-height: 1.2;'>Medication<br/>Adherence</span>
+                    <span style='font-size: 1.8rem; flex-shrink: 0;'>💊</span>
+                </div>
+                <div style='text-align: center; padding: 0 0.5rem;'>
+                    <div style='font-size: 2.6rem; font-weight: 800; line-height: 1; margin: 0.2rem 0; font-family: "Poppins", sans-serif;'>{int(adherence_rate)}%</div>
+                    <div style='font-size: 0.9rem; opacity: 0.9; font-weight: 600; line-height: 1.3;'>{doses_taken} of {total_doses_scheduled} doses {status_emoji}</div>
+                    <div style='font-size: 0.75rem; opacity: 0.85; margin-top: 0.2rem; font-weight: 500;'>{status_text}</div>
                 </div>
             </div>
         """, unsafe_allow_html=True)
 
-    # Upcoming Important Events Panel - minimal top spacing
-    st.markdown("<div style='margin: 0.8rem 0 0.3rem 0;'></div>", unsafe_allow_html=True)
-    st.markdown("<h3 style='margin: 0; color: #333;'>🎯 Next Upcoming Events</h3>", unsafe_allow_html=True)
-    st.markdown("<div style='margin: 0.3rem 0;'></div>", unsafe_allow_html=True)
+    with col2:
+        # Enhanced mood card
+        conversations = ConversationCRUD.get_recent_sentiment_data(user_id, days=1)
+        if conversations:
+            valid_sentiments = [c.sentiment_score for c in conversations if c.sentiment_score is not None]
+            
+            if valid_sentiments:
+                avg_mood = sum(valid_sentiments) / len(valid_sentiments)
+                mood_emoji = get_sentiment_emoji(avg_mood)
+                
+                # COLOR CODED MOOD BOX - Headspace inspired emotional wellness colors
+                if avg_mood > 0.3:
+                    bg_color = "linear-gradient(135deg, #A8E6CF 0%, #7DCEA0 100%)"  # Positive mood green
+                    text_color = "#FFFFFF"
+                    mood_label = "Positive"
+                    mood_icon = "😊"
+                    status_text = "Feeling wonderful!"
+                elif avg_mood > -0.3:
+                    bg_color = "linear-gradient(135deg, #FFE8B8 0%, #FFD89C 100%)"  # Neutral mood yellow
+                    text_color = "#8B5A00"
+                    mood_label = "Balanced"
+                    mood_icon = "😐"
+                    status_text = "Doing well"
+                else:
+                    bg_color = "linear-gradient(135deg, #FFB8B8 0%, #FF9999 100%)"  # Concern mood red
+                    text_color = "#FFFFFF"
+                    mood_label = "Needs care"
+                    mood_icon = "😔"
+                    status_text = "We're here for you"
+                
+                st.markdown(f"""
+                    <div style='background: {bg_color}; color: {text_color}; padding: 1.2rem 1rem; border-radius: 12px; height: 150px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;'>
+                        <div style='display: flex; justify-content: space-between; align-items: flex-start;'>
+                            <span style='font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.9;'>Today's Mood</span>
+                            <span style='font-size: 1.8rem; flex-shrink: 0;'>💚</span>
+                        </div>
+                        <div style='text-align: center; padding: 0 0.5rem;'>
+                            <div style='display: flex; align-items: center; justify-content: center; gap: 0.7rem;'>
+                                <span style='font-size: 2.2rem; flex-shrink: 0;'>{mood_icon}</span>
+                                <div>
+                                    <div style='font-size: 2rem; font-weight: 800; line-height: 1; font-family: "Poppins", sans-serif;'>{avg_mood:.2f}</div>
+                                    <div style='font-size: 0.9rem; font-weight: 700; margin-top: 0.1rem; line-height: 1.2;'>{mood_label}</div>
+                                    <div style='font-size: 0.75rem; opacity: 0.85; margin-top: 0.1rem; font-weight: 500;'>{status_text}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+            else:
+                # No sentiment data available
+                st.markdown("""
+                    <div style='background: linear-gradient(135deg, #E0D0E0 0%, #D0C0D0 100%); color: #6B4C6B; padding: 1.2rem 1rem; border-radius: 12px; height: 150px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;'>
+                        <div style='display: flex; justify-content: space-between; align-items: flex-start;'>
+                            <span style='font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.9;'>Today's Mood</span>
+                            <span style='font-size: 1.8rem; flex-shrink: 0;'>💚</span>
+                        </div>
+                        <div style='text-align: center; padding: 0 0.5rem;'>
+                            <div style='font-size: 2.2rem; margin-bottom: 0.4rem;'>💭</div>
+                            <div style='font-size: 0.95rem; font-weight: 700; color: #5E35B1;'>No data yet</div>
+                            <div style='font-size: 0.75rem; opacity: 0.85; margin-top: 0.2rem;'>Share how you feel today</div>
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+        else:
+            # No conversations at all
+            st.markdown("""
+                <div style='background: linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%); color: #5E35B1; padding: 1.2rem 1rem; border-radius: 12px; height: 150px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;'>
+                    <div style='display: flex; justify-content: space-between; align-items: flex-start;'>
+                        <span style='font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.9;'>Today's Mood</span>
+                        <span style='font-size: 1.8rem; flex-shrink: 0;'>💙</span>
+                    </div>
+                    <div style='text-align: center; padding: 0 0.5rem;'>
+                        <div style='font-size: 2.2rem; margin-bottom: 0.4rem;'>👋</div>
+                        <div style='font-size: 0.95rem; font-weight: 700; color: #5E35B1;'>Begin your wellness journey</div>
+                        <div style='font-size: 0.75rem; opacity: 0.85; margin-top: 0.2rem;'>Chat with Carely today</div>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+
+    # Enhanced Events Section - COMPACT
+    st.markdown("<div style='margin: 1.2rem 0 0.8rem 0;'></div>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin: 0; color: #2D9CDB; font-size: 1.9rem; font-weight: 700; font-family: Poppins, sans-serif; letter-spacing: -0.3px;'>🎯 Your Upcoming Schedule</h2>", unsafe_allow_html=True)
     
-    # Get upcoming events using helper function
     upcoming_events = get_upcoming_events_for_overview(user_id)
     
     if upcoming_events:
+        from collections import defaultdict
+        events_by_date = defaultdict(list)
         for event in upcoming_events:
-            with st.container():
-                col_time, col_info = st.columns([1, 3])
+            events_by_date[event['date_display']].append(event)
+        
+        for date_str, date_events in events_by_date.items():
+            if len(events_by_date) > 1:
+                st.markdown(f"""<div style='background: linear-gradient(135deg, rgba(45, 156, 219, 0.12) 0%, rgba(102, 126, 234, 0.1) 100%); padding: 0.6rem 1rem; border-radius: 10px; margin-bottom: 0.8rem; margin-top: 0.5rem; border-left: 4px solid #2D9CDB; box-shadow: 0 2px 6px rgba(45, 156, 219, 0.08);'><span style='font-size: 1.05rem; font-weight: 700; color: #2D3436; font-family: Poppins, sans-serif; letter-spacing: -0.2px;'>📅 {date_str}</span></div>""", unsafe_allow_html=True)
+            
+            for event in date_events:
+                def get_event_color(title, emoji):
+                    title_lower = title.lower()
+                    if any(word in title_lower for word in ['doctor', 'medical', 'appointment', 'health', 'medication', 'clinic']):
+                        return '#5DADE2', 'rgba(93, 173, 226, 0.12)', '#E3F2FD'  # Medical blue
+                    elif any(word in title_lower for word in ['birthday', 'anniversary', 'family', 'visit']):
+                        return '#FF9966', 'rgba(255, 153, 102, 0.12)', '#FFF3E0'  # Personal orange
+                    elif any(word in title_lower for word in ['market', 'shopping', 'social', 'lunch', 'dinner', 'coffee']):
+                        return '#7DCEA0', 'rgba(125, 206, 160, 0.12)', '#E8F5E9'  # Social green
+                    elif any(word in title_lower for word in ['church', 'meeting', 'class', 'group']):
+                        return '#BB8FCE', 'rgba(187, 143, 206, 0.12)', '#F3E5F5'  # Group lavender
+                    else:
+                        return '#2D9CDB', 'rgba(45, 156, 219, 0.12)', '#E3F2FD'  # Default teal
                 
-                with col_time:
-                    st.write(f"**{event['time_display']}**")
-                    st.caption(event['date_display'])
+                event_color, event_bg, event_card_bg = get_event_color(event['title'], event['emoji'])
+                description = event.get('description', '')
+                if description and len(description) > 70:
+                    description = description[:67] + "..."
                 
-                with col_info:
-                    # Display title with emoji
-                    st.write(f"{event['emoji']} **{event['title']}**")
+                # Build event card using container approach
+                event_container = st.container()
+                with event_container:
+                    # Create the card wrapper
+                    st.markdown(f"<div style='background: linear-gradient(135deg, {event_card_bg} 0%, rgba(255,255,255,0.95) 100%); padding: 1rem 1.2rem; margin-bottom: 10px; border-radius: 12px; border-left: 4px solid {event_color}; box-shadow: 0 2px 12px rgba(0,0,0,0.06); position: relative;'>", unsafe_allow_html=True)
                     
-                    # Show description if available (truncate if too long)
-                    if event.get("description"):
-                        desc = event["description"]
-                        if len(desc) > 80:
-                            desc = desc[:77] + "..."
-                        st.write(f"_{desc}_")
+                    # Create columns for time and content
+                    time_col, content_col = st.columns([1, 4])
                     
-                    # Show recurring badge
-                    if event.get("is_recurring"):
-                        st.caption("� Recurring")
-                
-                st.divider()
+                    with time_col:
+                        time_html = f"<div style='text-align: center;'><div style='font-size: 1.1rem; font-weight: 800; color: {event_color}; line-height: 1.2; font-family: Poppins, sans-serif;'>{event['time_display']}</div>"
+                        if len(events_by_date) == 1:
+                            time_html += f"<div style='font-size: 0.75rem; color: #636E72; margin-top: 2px; font-weight: 600;'>{event['date_display']}</div>"
+                        time_html += "</div>"
+                        st.markdown(time_html, unsafe_allow_html=True)
+                    
+                    with content_col:
+                        # Event title
+                        st.markdown(f"<div style='font-size: 1.05rem; font-weight: 700; color: #2D3436; line-height: 1.4; font-family: Poppins, sans-serif; margin-bottom: 0.3rem;'><span style='font-size: 1.2rem; margin-right: 0.4rem;'>{event['emoji']}</span>{event['title']}</div>", unsafe_allow_html=True)
+                        
+                        # Description if present
+                        if description:
+                            st.markdown(f"<div style='font-size: 0.9rem; color: #636E72; line-height: 1.5; font-family: Inter, sans-serif; margin-top: 0.3rem;'>{description}</div>", unsafe_allow_html=True)
+                    
+                    # Recurring badge if needed
+                    if event.get('is_recurring'):
+                        st.markdown("<div style='position: absolute; top: 0.8rem; right: 0.8rem;'><span style='background: linear-gradient(135deg, #BB8FCE 0%, #9B7EBD 100%); color: white; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; font-family: Poppins, sans-serif; box-shadow: 0 2px 6px rgba(187, 143, 206, 0.3); letter-spacing: 0.3px;'>↻ Recurring</span></div>", unsafe_allow_html=True)
+                    
+                    # Close the card wrapper
+                    st.markdown("</div>", unsafe_allow_html=True)
     else:
-        st.info("📭 No upcoming events scheduled.")
+        st.markdown("""
+            <div style='background: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 100%); 
+                        padding: 1.5rem; 
+                        border-radius: 12px; 
+                        text-align: center; 
+                        border: 2px dashed rgba(45, 156, 219, 0.25);'>
+                <div style='font-size: 2.2rem; margin-bottom: 0.3rem;'>📅</div>
+                <div style='font-size: 1rem; font-weight: 600; color: #2D9CDB; margin-bottom: 0.3rem;'>Your schedule is clear</div>
+                <div style='font-size: 0.85rem; color: #636E72;'>Add appointments to stay organized</div>
+            </div>
+        """, unsafe_allow_html=True)
 
-    # Recent Conversations - Full Width - minimal spacing
-    st.markdown("<div style='margin: 0.8rem 0 0.3rem 0;'></div>", unsafe_allow_html=True)
-    st.markdown("<h3 style='margin: 0; color: #333;'>💬 Recent Conversations</h3>", unsafe_allow_html=True)
-    st.markdown("<div style='margin: 0.3rem 0;'></div>", unsafe_allow_html=True)
+    # Enhanced Recent Conversations - COMPACT
+    st.markdown("<div style='margin: 1.2rem 0 0.8rem 0;'></div>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin: 0; color: #764BA2; font-size: 1.9rem; font-weight: 700; font-family: Poppins, sans-serif; letter-spacing: -0.3px;'>💬 Your Recent Chats</h2>", unsafe_allow_html=True)
 
     recent_conversations = ConversationCRUD.get_user_conversations(user_id, limit=10)
 
     if recent_conversations:
-        # Create a more spacious layout with cards
         for conv in recent_conversations:
-            with st.container():
-                # Show sentiment with color
-                sentiment_color = get_sentiment_color(conv.sentiment_score or 0)
-                sentiment_emoji = get_sentiment_emoji(conv.sentiment_score or 0)
-
-                # Always convert to Central Time for display (handles naive UTC timestamps from DB)
-                display_time = to_central(conv.timestamp)
-                
-                # Create a nice card layout
-                st.markdown(f"""
-                    <div style='background-color: #F8F9FA; padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 4px solid #FF8C69;'>
-                        <p style='color: #5A6C7D; font-size: 0.9rem; margin: 0;'>
-                            <strong>{display_time.strftime('%I:%M %p')}</strong> {sentiment_emoji}
-                        </p>
-                    </div>
-                """, unsafe_allow_html=True)
-                
-                col1, col2 = st.columns([1, 1])
-                with col1:
-                    st.markdown(f"**You:** {conv.message}")
-                with col2:
-                    st.markdown(f"**Carely:** {conv.response}")
-                
-                st.divider()
+            sentiment_color = get_sentiment_color(conv.sentiment_score or 0)
+            sentiment_emoji = get_sentiment_emoji(conv.sentiment_score or 0)
+            display_time = to_central(conv.timestamp)
+            
+            user_msg = conv.message if len(conv.message) <= 60 else conv.message[:57] + "..."
+            carely_msg = conv.response if len(conv.response) <= 140 else conv.response[:137] + "..."
+            
+            # Modern card-based conversation design
+            conv_html = f"""
+<div style='background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.95) 100%); 
+            padding: 1rem 1.2rem; 
+            margin-bottom: 10px; 
+            border-radius: 12px; 
+            border-left: 4px solid {sentiment_color}; 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);'>
+    <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;'>
+        <div style='font-size: 0.85rem; font-weight: 700; color: #636E72; font-family: Inter, sans-serif; letter-spacing: 0.3px;'>
+            {display_time.strftime('%I:%M %p')}
+        </div>
+        <div style='font-size: 1.3rem;'>{sentiment_emoji}</div>
+    </div>
+    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+        <div style='background: rgba(45, 156, 219, 0.06); padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid rgba(45, 156, 219, 0.15);'>
+            <div style='font-size: 0.8rem; font-weight: 700; color: #2D9CDB; margin-bottom: 0.5rem; font-family: Poppins, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;'>You</div>
+            <div style='font-size: 0.95rem; color: #2D3436; line-height: 1.5; font-family: Inter, sans-serif;'>{user_msg}</div>
+        </div>
+        <div style='background: rgba(118, 75, 162, 0.06); padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid rgba(118, 75, 162, 0.15);'>
+            <div style='font-size: 0.8rem; font-weight: 700; color: #764BA2; margin-bottom: 0.5rem; font-family: Poppins, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;'>Carely</div>
+            <div style='font-size: 0.95rem; color: #2D3436; line-height: 1.5; font-family: Inter, sans-serif;'>{carely_msg}</div>
+        </div>
+    </div>
+</div>
+"""
+            st.markdown(conv_html, unsafe_allow_html=True)
     else:
-        st.info("No recent conversations. Start chatting with Carely to see your conversation history here!")
+        st.markdown("""
+            <div style='background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%); 
+                        padding: 1.5rem; 
+                        border-radius: 12px; 
+                        text-align: center; 
+                        border: 2px dashed rgba(118, 75, 162, 0.25);'>
+                <div style='font-size: 2.2rem; margin-bottom: 0.3rem;'>💬</div>
+                <div style='font-size: 1rem; font-weight: 600; color: #764BA2; margin-bottom: 0.3rem;'>Start your first conversation</div>
+                <div style='font-size: 0.85rem; color: #636E72;'>Chat with Carely to track your wellness journey</div>
+            </div>
+        """, unsafe_allow_html=True)
 
+
+# ... (keep the rest of the functions like show_chat_interface, show_medication_management, etc.
+# but apply similar compact spacing principles to them)
 
 def show_emergency_safety_sheet(user_id: int, concerns: list, severity: str,
-                                message: str):
+                                message: str, emergency_result: dict = None):
     """Display emergency safety sheet with two-step flow"""
     user = UserCRUD.get_user(user_id)
 
     st.error("🚨 **EMERGENCY ALERT DETECTED**")
 
     st.markdown("### Safety Check")
-    st.warning(f"We noticed you mentioned: {', '.join(concerns)}")
+    st.warning(f"We are alerting your caregiver  {', '.join(concerns)}")
 
     st.markdown("---")
     st.markdown("### 📋 **What would you like to do?**")
@@ -1207,30 +1189,26 @@ def show_emergency_safety_sheet(user_id: int, concerns: list, severity: str,
         if st.button("🔴 **Notify Caregiver** (very urgent)",
                      use_container_width=True,
                      type="primary"):
-            caregivers = CaregiverPatientCRUD.get_patient_caregivers(user_id)
+            # Use the full emergency_result if available, otherwise create fallback
+            if emergency_result and emergency_result.get("is_emergency"):
+                alert_data = emergency_result
+            else:
+                # Fallback structure if emergency_result not available
+                alert_data = {
+                    "is_emergency": True,
+                    "severity_label": "Concerning",
+                    "severity_emoji": "⚠️",
+                    "symptom_summary": ", ".join(concerns),
+                    "raw_message": message,
+                    "user_id": user_id
+                }
+            
             alert_sent = False
-
-            if caregivers:
-                for caregiver in caregivers:
-                    if caregiver.telegram_chat_id:
-                        result = send_emergency_alert(
-                            chat_id=caregiver.telegram_chat_id,
-                            patient_name=user.name,
-                            concerns=concerns,
-                            severity=severity,
-                            message=message)
-                        if result.get("success"):
-                            alert_sent = True
-
-            if not alert_sent and os.getenv("TELEGRAM_CHAT_ID"):
-                result = send_emergency_alert(
-                    chat_id=os.getenv("TELEGRAM_CHAT_ID"),
-                    patient_name=user.name,
-                    concerns=concerns,
-                    severity=severity,
-                    message=message)
-                if result.get("success"):
-                    alert_sent = True
+            result = send_emergency_alert(
+                emergency=alert_data,
+                user_name=user.name)
+            if result.get("success"):
+                alert_sent = True
 
             if alert_sent:
                 st.success("✅ **Help is on the way!**")
@@ -1258,7 +1236,6 @@ def show_emergency_safety_sheet(user_id: int, concerns: list, severity: str,
 def show_memory_game():
     """Senior-friendly Memory Card Matching Game"""
     import random
-    import time as time_module
     
     st.header("🎮 Memory Card Game")
     st.markdown("### Match the pairs! Flip two cards to find matching pairs.")
@@ -1461,12 +1438,12 @@ def show_chat_interface(user_id: int):
     """Show chat interface with Carely"""
     user = UserCRUD.get_user(user_id)
     
-    # Add CSS to reduce spacing and fix button alignment
+    # Add CSS for senior-friendly chat interface with custom message bubble colors
     st.markdown("""
         <style>
         /* Reduce top spacing on chat page */
         .main .block-container {
-            padding-top: 1rem !important;
+            padding-top: 0.5rem !important;
         }
         
         /* Fix quick action buttons - prevent text wrapping */
@@ -1480,10 +1457,154 @@ def show_chat_interface(user_id: int):
         .element-container {
             margin-bottom: 0.5rem !important;
         }
+        
+        /* ============================================ */
+        /* SENIOR-FRIENDLY CHAT MESSAGE STYLING */
+        /* High contrast colors for easy readability */
+        /* ============================================ */
+        
+        /* Base styling for ALL chat messages - Compact and clean */
+        [data-testid="stChatMessage"] {
+            border-radius: 12px !important;
+            padding: 0.9rem 1.2rem !important;
+            margin: 0.3rem 0 !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+            transition: all 0.2s ease !important;
+            max-width: fit-content !important;
+            width: auto !important;
+            min-width: 200px !important;
+            display: inline-flex !important;
+        }
+        
+        [data-testid="stChatMessage"]:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+            transform: translateY(-1px) !important;
+        }
+        
+        /* USER MESSAGES - White background with black text and gray border */
+        /* Target messages with role="user" */
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]),
+        [data-testid="stChatMessage"].user-message {
+            background-color: #FFFFFF !important;
+            background: #FFFFFF !important;
+            background-image: none !important;
+            border: 1.5px solid #E5E5E5 !important;
+            margin-left: auto !important;
+            margin-right: 2rem !important;
+            max-width: 75% !important;
+        }
+        
+        /* AI/ASSISTANT MESSAGES - Light green background with black text and green border */
+        /* Target messages with role="assistant" */
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]),
+        [data-testid="stChatMessage"].assistant-message {
+            background-color: #E8F5E8 !important;
+            background: #E8F5E8 !important;
+            background-image: none !important;
+            border: 1.5px solid #D0E6D0 !important;
+            margin-left: 2rem !important;
+            margin-right: auto !important;
+            max-width: 75% !important;
+        }
+        
+        /* Avatar styling - make compact */
+        [data-testid="stChatMessageAvatar"] {
+            width: 35px !important;
+            height: 35px !important;
+            min-width: 35px !important;
+            margin-right: 0.8rem !important;
+        }
+        
+        /* Force black text for ALL chat content with clean typography */
+        [data-testid="stChatMessage"] p,
+        [data-testid="stChatMessage"] div,
+        [data-testid="stChatMessage"] span,
+        [data-testid="stChatMessageContent"] p,
+        [data-testid="stChatMessageContent"] div,
+        [data-testid="stChatMessageContent"] span,
+        [data-testid="stMarkdownContainer"] p {
+            color: #000000 !important;
+            font-size: 1.05rem !important;
+            line-height: 1.5 !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+            font-weight: 400 !important;
+            margin-bottom: 0.3rem !important;
+        }
+        
+        /* Chat message content container - remove extra padding */
+        [data-testid="stChatMessageContent"] {
+            padding: 0 !important;
+            gap: 0.3rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Make content wrapper dynamic */
+        [data-testid="stChatMessageContent"] > div {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Ensure markdown container doesn't add extra width */
+        [data-testid="stMarkdownContainer"] {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Remove any pseudo-element backgrounds */
+        [data-testid="stChatMessage"]::before,
+        [data-testid="stChatMessage"]::after {
+            display: none !important;
+            content: none !important;
+        }
+        
+        /* Clean up spacing between paragraphs in messages */
+        [data-testid="stChatMessage"] p:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Force chat message wrapper to be dynamic width */
+        div:has(> [data-testid="stChatMessage"]) {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+        
+        div:has(> [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"])) {
+            align-items: flex-end !important;
+        }
         </style>
     """, unsafe_allow_html=True)
     
-    st.header(f"💬 Chat with Carely - {user.name}")
+    # Senior-friendly header with large, bold text and high contrast - compact design
+    st.markdown(f"""
+        <div style='background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+                    text-align: center;
+                    margin: -1rem auto 1.5rem auto;
+                    padding: 1.1rem 1rem;
+                    border-radius: 15px;
+                    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+                    max-width: 800px;'>
+            <h1 style='margin: 0;
+                       color: #FFFFFF;
+                       font-size: 2.2rem;
+                       font-weight: 800;
+                       font-family: Poppins, sans-serif;
+                       line-height: 1.3;
+                       letter-spacing: 1px;
+                       text-shadow: 0 2px 8px rgba(0,0,0,0.15);'>
+                💬 Chat with Carely
+            </h1>
+            <p style='margin: 0.6rem 0 0 0;
+                      font-size: 4.8rem;
+                      color: rgba(255, 255, 255, 0.95);
+                      font-family: Inter, sans-serif;
+                      font-weight: 600;
+                      letter-spacing: 0.5px;'>
+                Hello {user.name}! I'm here to help you today 🌟
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
 
     # Display emergency safety sheet if emergency detected
     if st.session_state.get("emergency_data") and not st.session_state.get(
@@ -1493,7 +1614,8 @@ def show_chat_interface(user_id: int):
             user_id=user_id,
             concerns=emergency_data.get("concerns", []),
             severity=emergency_data.get("severity", "medium"),
-            message=emergency_data.get("message", ""))
+            message=emergency_data.get("message", ""),
+            emergency_result=emergency_data.get("emergency_result"))
 
         if st.session_state.get("emergency_handled"):
             st.session_state.emergency_data = None
@@ -1625,7 +1747,7 @@ def show_chat_interface(user_id: int):
                 with st.chat_message("user"):
                     st.write(message["content"])
             else:
-                with st.chat_message("assistant", avatar="🏥"):
+                with st.chat_message("assistant", avatar="🤖"):
                     msg_col1, msg_col2 = st.columns([9, 1])
 
                     with msg_col1:
@@ -1747,10 +1869,10 @@ def show_chat_interface(user_id: int):
             st.rerun()
 
     # Integrated input bar with voice and text
-    st.markdown("<hr style='margin: 0.5rem 0;'>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size: 1.1rem; font-weight: 600; margin: 0.3rem 0;'>Type or speak your message:</p>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 0.5rem 0; border: none; border-top: 1px solid #ddd;'>", unsafe_allow_html=True)
+    st.markdown("<p class='input-label' style='font-size: 1rem; font-weight: 600; margin: 0.3rem 0;'>Type or speak your message:</p>", unsafe_allow_html=True)
 
-    # Add CSS to align all input elements properly
+    # Add CSS to align all input elements properly and style buttons
     st.markdown("""
         <style>
         /* Align all input row elements */
@@ -1776,6 +1898,26 @@ def show_chat_interface(user_id: int):
         /* Ensure send button aligns */
         div[data-testid="column"] > div > div > button {
             margin-bottom: 0 !important;
+        }
+        
+        /* Style Quick Action buttons with vibrant, readable colors */
+        button[kind="secondary"] {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%) !important;
+            color: white !important;
+            border: none !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2) !important;
+        }
+        
+        button[kind="secondary"]:hover {
+            background: linear-gradient(135deg, #5568D3 0%, #654A8F 100%) !important;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        button[kind="secondary"]:active {
+            transform: translateY(0px) !important;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -1814,33 +1956,33 @@ def show_chat_interface(user_id: int):
                                     key=f'voice_input_{user_id}')
     
     # Persistent Quick Actions - Below chat input for easy access
-    st.markdown("<p style='font-weight: 600; margin: 0.5rem 0 0.3rem 0;'>Quick Actions:</p>", unsafe_allow_html=True)
+    st.markdown("<p class='section-header' style='font-weight: 600; margin: 0.5rem 0 0.3rem 0; font-size: 1.1rem;'>Quick Actions:</p>", unsafe_allow_html=True)
     
     # Use equal columns with proper button sizing
-    action_col1, action_col2, action_col3, action_col4, action_col5 = st.columns(5, gap="small")
+    action_col1, action_col2, action_col3, action_col4 = st.columns(4, gap="small")
     
     with action_col1:
-        if st.button("🕐 Log\nMedication", key="persistent_log_med", use_container_width=True):
+        if st.button("🕐 Log Meds", key="persistent_log_med", use_container_width=True):
             st.session_state.pending_action = "log_medication"
             st.rerun()
     
     with action_col2:
-        if st.button("🎵 Play\nMusic", key="persistent_play_music", use_container_width=True):
+        if st.button("🎵 Play Music", key="persistent_play_music", use_container_width=True):
             st.session_state.pending_action = "play_music"
             st.rerun()
     
     with action_col3:
-        if st.button("🧩 Fun\nCorner", key="persistent_fun_corner", use_container_width=True):
+        if st.button("🧩 Fun Corner", key="persistent_fun_corner", use_container_width=True):
             st.session_state.pending_action = "fun_corner"
             st.rerun()
     
-    with action_col4:
-        if st.button("🧠 Memory\nCue", key="persistent_memory_cue", use_container_width=True):
-            st.session_state.pending_action = "memory_cue"
-            st.rerun()
+    # with action_col4:
+    #     if st.button("🧠 Memory Cue", key="persistent_memory_cue", use_container_width=True):
+    #         st.session_state.pending_action = "memory_cue"
+    #         st.rerun()
     
-    with action_col5:
-        if st.button("🎮 Memory\nGame", key="persistent_memory_game", use_container_width=True):
+    with action_col4:
+        if st.button("🎮 Memory Game", key="persistent_memory_game", use_container_width=True):
             st.session_state.show_memory_game = True
             st.rerun()
 
@@ -1883,7 +2025,7 @@ def show_chat_interface(user_id: int):
                     break
             
             # Generate response
-            with st.chat_message("assistant", avatar="🏥"):
+            with st.chat_message("assistant", avatar="🤖"):
                 if medication_id:
                     # Log the medication
                     with st.spinner("Logging your medication..."):
@@ -1916,7 +2058,7 @@ def show_chat_interface(user_id: int):
         else:
             # Normal conversation flow
             # Generate AI response
-            with st.chat_message("assistant", avatar="🏥"):
+            with st.chat_message("assistant", avatar="🤖"):
                 with st.spinner("Carely is thinking..."):
                     response_data = st.session_state.companion_agent.generate_response(
                         user_id=user_id, user_message=prompt)
@@ -1953,10 +2095,15 @@ def show_chat_interface(user_id: int):
             # Check for emergency
             if response_data.get("is_emergency") and not st.session_state.get(
                     "emergency_handled"):
+                # Store the full emergency_result for Telegram notification
+                emergency_result = response_data.get("emergency_result", {})
+                emergency_result["raw_message"] = prompt  # Add user message
+                emergency_result["user_id"] = user_id  # Add user_id
                 st.session_state.emergency_data = {
                     "concerns": response_data.get("emergency_concerns", []),
                     "severity": response_data.get("emergency_severity", "medium"),
-                    "message": prompt
+                    "message": prompt,
+                    "emergency_result": emergency_result  # Full detection result
                 }
 
         # Clear the input field after sending
@@ -2121,18 +2268,40 @@ def show_medication_management(user_id: int):
                 name="adherence_rate")
         daily_adherence["date"] = pd.to_datetime(daily_adherence["date"])
 
+        # Create line chart with scatter to ensure points are visible
         fig = px.line(daily_adherence,
                       x="date",
                       y="adherence_rate",
                       title=f"Daily Adherence Rate ({period})",
-                      range_y=[0, 100])
+                      range_y=[0, 105],
+                      markers=True)
+        
+        # Style the line - blue color with prominent markers
+        fig.update_traces(
+            line=dict(color='#87CEEB', width=3),
+            marker=dict(size=10, color='#87CEEB', line=dict(width=2, color='white')),
+            mode='lines+markers'
+        )
+        
         fig.add_hline(y=80,
                       line_dash="dash",
                       line_color="orange",
-                      annotation_text="Target: 80%")
-        fig.update_layout(yaxis_title="Adherence Rate (%)", xaxis_title="Date")
+                      annotation_text="Target: 80%",
+                      annotation_position="right")
+        
+        fig.update_layout(
+            yaxis_title="Adherence Rate (%)", 
+            xaxis_title="Date",
+            showlegend=False,
+            hovermode='x unified'
+        )
+        
+        fig.update_xaxes(showgrid=False)
+        fig.update_yaxes(showgrid=False)
 
         st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("No adherence data available yet. Start logging your medications to see trends!")
 
     st.divider()
 
@@ -2237,9 +2406,9 @@ def show_health_insights(user_id: int):
     with col3:
         st.metric("Total Conversations", len(conversations))
 
-    with col4:
-        alerts = CaregiverAlertCRUD.get_unresolved_alerts(user_id)
-        st.metric("Active Concerns", len(alerts))
+    # with col4:
+    #     alerts = CaregiverAlertCRUD.get_unresolved_alerts(user_id)
+    #     st.metric("Active Concerns", len(alerts))
 
     st.divider()
 
@@ -2259,11 +2428,21 @@ def show_health_insights(user_id: int):
             "date")["sentiment_score"].mean().reset_index()
         daily_mood["date"] = pd.to_datetime(daily_mood["date"])
 
+        # Create line chart with scatter to ensure points are visible
         fig_mood = px.line(daily_mood,
                            x="date",
                            y="sentiment_score",
                            title="Daily Average Mood",
-                           range_y=[-1, 1])
+                           range_y=[-1.1, 1.1],
+                           markers=True)
+        
+        # Style the line - blue color with prominent markers
+        fig_mood.update_traces(
+            line=dict(color='#87CEEB', width=3),
+            marker=dict(size=10, color='#87CEEB', line=dict(width=2, color='white')),
+            mode='lines+markers'
+        )
+        
         fig_mood.add_hline(y=0, line_dash="dash", line_color="gray")
         fig_mood.add_hline(y=0.3,
                            line_dash="dot",
@@ -2273,8 +2452,20 @@ def show_health_insights(user_id: int):
                            line_dash="dot",
                            line_color="red",
                            annotation_text="Concerning")
+        
+        fig_mood.update_layout(
+            yaxis_title="Sentiment Score",
+            xaxis_title="Date",
+            showlegend=False,
+            hovermode='x unified'
+        )
+        
+        fig_mood.update_xaxes(showgrid=False)
+        fig_mood.update_yaxes(showgrid=False)
 
         st.plotly_chart(fig_mood, use_container_width=True)
+    else:
+        st.info("No mood data available yet. Chat with Carely to track your mood over time!")
 
     # Health recommendations
     st.subheader("💡 Health Recommendations")

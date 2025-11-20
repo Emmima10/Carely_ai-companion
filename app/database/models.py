@@ -8,6 +8,9 @@ from utils.timezone_utils import now_central
 DATABASE_URL = "sqlite:///carely.db"
 engine = create_engine(DATABASE_URL, echo=False)
 
+# Import auth models to ensure they're registered
+from app.auth.auth_models import Account, SessionToken
+
 class User(SQLModel, table=True):
     __table_args__ = {"extend_existing": True}
     

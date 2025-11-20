@@ -1,4 +1,3 @@
-from utils.timezone_utils import now_central
 """
 Unified Memory Manager orchestrating all four memory layers
 Provides a single interface for context-aware, personalized responses
@@ -12,6 +11,7 @@ from app.memory.short_term_memory import ShortTermMemory
 from app.memory.long_term_memory import LongTermMemory
 from app.memory.episodic_memory import EpisodicMemory
 from app.memory.structured_memory import StructuredMemory
+from utils.timezone_utils import now_central
 
 logger = logging.getLogger(__name__)
 
@@ -150,66 +150,24 @@ class MemoryManager:
     def recall_information(self, user_id: int, query: str) -> str:
         """
         Intelligently recall specific information based on query
-        
+
         Args:
             user_id: User ID
             query: User's query
-        
+
         Returns:
             Relevant information
         """
         query_lower = query.lower()
-
-        # Check for specific query types
-        if any(word in query_lower
-               for word in ['medication', 'medicine', 'pill', 'schedule']):
-            return self.structured.get_medication_schedule(user_id)
-
-        elif any(word in query_lower
-                 for word in ['breakfast', 'lunch', 'dinner', 'meal', 'eat']):
-            # First, check if asking about meal TIME (e.g., "what time is lunch?")
-            is_time_query = any(
-                phrase in query_lower
-                for phrase in ['what time', 'when is', 'time for'])
-
-            if is_time_query:
-                # Determine which meal they're asking about
-                meal_name = None
-                if 'breakfast' in query_lower:
-                    meal_name = 'breakfast'
-                elif 'lunch' in query_lower:
-                    meal_name = 'lunch'
-                elif 'dinner' in query_lower:
-                    meal_name = 'dinner'
-
-                if meal_name:
-                    # Look up configured meal time
-                    meal_time = self.structured.get_meal_time(
-                        user_id, meal_name)
-                    if meal_time:
-                        return f"Your {meal_name} is usually at {meal_time}."
-                    else:
-                        return f"I don't have a time set for {meal_name}. What time do you usually have it?"
-
-            # Otherwise, asking about today's meals - use daily summary only when explicitly requested
-            # Do NOT return "Today you mentioned..." for simple meal time queries
-            if any(word in query_lower
-                   for word in ['today', 'summary', 'what did i']):
-                logs = self.structured.get_daily_logs(user_id,
-                                                      exclude_message=query,
-                                                      max_topics=3)
-                if logs["meals"]:
-                    return f"Today you mentioned: {', '.join(logs['meals'])}"
-
-            # If not a time query or summary request, fall through to general recall
-            return "I can help you track meals or set meal times. What would you like to know?"
-
-        elif any(
+        
+        # 1) Explicit memory recall first: "Do you remember...?"
+        if any(
                 word in query_lower
                 for word in ['remember', 'talked about', 'discussed', 'said']):
             # Recall from long-term memory
             similar = self.long_term.retrieve_similar_conversations(
-                query, user_id, top_k=3, exclude_query=query)
+                query, user_id, top_k=3, exclude_query=query
+            )
             if similar:
                 response = "Yes, I remember we talked about:\n"
                 for conv in similar[:2]:
@@ -218,7 +176,104 @@ class MemoryManager:
                 return response
             else:
                 return "I'm not finding a specific memory of that. Could you give me more details?"
-
+        
+        # 2) Medication-related queries
+        elif any(word in query_lower
+                 for word in ['medication', 'medicine', 'pill', 'schedule']):
+            return self.structured.get_medication_schedule(user_id)
+        
+        # 3) Meal-related queries (breakfast / lunch / dinner)
+        elif any(word in query_lower
+                 for word in ['breakfast', 'lunch', 'dinner', 'meal', 'eat']):
+            # Check if this is a statement about eating (not a query)
+            is_meal_statement = any(
+                phrase in query_lower
+                for phrase in ['i ate', 'i had', 'just ate', 'just had', 'i finished', 'i consumed']
+            )
+            
+            # If it's a statement about eating, return empty so LLM can handle it naturally
+            if is_meal_statement:
+                return ""
+            
+            # First, check if asking about meal TIME (e.g., "what time is lunch?")
+            is_time_query = any(
+                phrase in query_lower
+                for phrase in ['what time', 'when is', 'time for']
+            )
+            
+            if is_time_query:
+                meal_name = None
+                if 'breakfast' in query_lower:
+                    meal_name = 'breakfast'
+                elif 'lunch' in query_lower:
+                    meal_name = 'lunch'
+                elif 'dinner' in query_lower:
+                    meal_name = 'dinner'
+                
+                if meal_name:
+                    # Look up configured meal time
+                    meal_time = self.structured.get_meal_time(user_id, meal_name)
+                    if meal_time:
+                        return f"Your {meal_name} is usually at {meal_time}."
+                    else:
+                        return (
+                            f"I don't have a time set for {meal_name}. "
+                            f"What time do you usually have it?"
+                        )
+            
+            # Asking about what was eaten for a specific meal
+            # Use short-term memory to find the actual conversation about the meal
+            from app.database.models import get_session, Conversation
+            from sqlmodel import select
+            from datetime import timedelta
+            
+            date = now_central()
+            day_start = date.replace(hour=0, minute=0, second=0, microsecond=0)
+            day_end = day_start + timedelta(days=1)
+            
+            # Determine which meal they're asking about
+            meal_keyword = None
+            if 'breakfast' in query_lower:
+                meal_keyword = 'breakfast'
+            elif 'lunch' in query_lower:
+                meal_keyword = 'lunch'
+            elif 'dinner' in query_lower:
+                meal_keyword = 'dinner'
+            
+            with get_session() as session:
+                # Find conversations today that mention the meal
+                conv_query = select(Conversation).where(
+                    Conversation.user_id == user_id,
+                    Conversation.timestamp >= day_start,
+                    Conversation.timestamp < day_end
+                ).order_by(Conversation.timestamp.desc())
+                
+                conversations = session.exec(conv_query).all()
+                
+                # Look for the conversation where they mentioned what they ate
+                for conv in conversations:
+                    # Skip the current query
+                    if conv.message.lower().strip() == query_lower.strip():
+                        continue
+                    
+                    msg_lower = conv.message.lower()
+                    
+                    # If looking for a specific meal, find it
+                    if meal_keyword and meal_keyword in msg_lower:
+                        # Check if it's a statement about eating
+                        if any(phrase in msg_lower for phrase in ['i had', 'i ate', 'for my', 'my ' + meal_keyword]):
+                            # Extract what they ate
+                            return f"You mentioned: \"{conv.message}\""
+                    
+                    # If just asking about meals in general and 'today' is in query
+                    elif 'today' in query_lower and any(meal in msg_lower for meal in ['breakfast', 'lunch', 'dinner']):
+                        if any(phrase in msg_lower for phrase in ['i had', 'i ate', 'for my']):
+                            return f"You mentioned: \"{conv.message}\""
+                
+                # If no specific meal found, provide a general response
+                return "I don't have a record of that specific meal. What did you have?"
+        
+        # 4) Day-level summaries (today / yesterday)
         elif any(word in query_lower
                  for word in ['today', 'yesterday', 'summary']):
             # Get episodic summary
@@ -226,16 +281,18 @@ class MemoryManager:
             if 'yesterday' in query_lower:
                 from datetime import timedelta
                 date = date - timedelta(days=1)
-
+            
             summary = self.episodic.get_formatted_summary(user_id, date)
             return summary
-
+        
+        # 5) General structured recall fallback
         else:
-            # General recall from structured memory
             result = self.structured.recall_specific_info(
-                user_id, query, exclude_message=query)
+                user_id, query, exclude_message=query
+            )
             if result:
                 return result
+            
             # Fallback if nothing matches
             return "I'm here to help. Could you tell me more about what you're looking for?"
 

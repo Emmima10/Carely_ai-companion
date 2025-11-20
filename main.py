@@ -3,8 +3,12 @@ import threading
 from dotenv import load_dotenv
 from app.database.models import create_tables
 from app.scheduling.reminder_scheduler import ReminderScheduler
+from app.styles.theme import apply_global_theme
 from frontend.dashboard import run_dashboard
+from frontend.login import show_login_page, check_authentication, show_logout_button
+from frontend.onboarding import show_onboarding_wizard
 from data.sample_data import initialize_sample_data
+from app.auth.user_seeder import ensure_test_users_exist
 
 # Load environment variables
 load_dotenv()
@@ -15,6 +19,9 @@ def initialize_app():
     """Initialize the application with database and sample data"""
     create_tables()
     initialize_sample_data()
+    
+    # Seed existing users into auth system
+    ensure_test_users_exist()
     
     # Start the reminder scheduler in a separate thread
     scheduler = ReminderScheduler()
@@ -34,14 +41,12 @@ def main():
         }
     )
     
-    # Force light theme with custom CSS
+    # Apply global Carely theme (light theme for all widgets)
+    apply_global_theme()
+    
+    # Additional layout optimizations
     st.markdown("""
         <style>
-        /* Force light theme */
-        :root {
-            color-scheme: light !important;
-        }
-        
         /* Remove Streamlit's default header/toolbar */
         header[data-testid="stHeader"] {
             display: none !important;
@@ -97,8 +102,22 @@ def main():
     # Initialize the app
     scheduler = initialize_app()
     
-    # Run the patient dashboard
-    run_dashboard()
+    # Check authentication
+    is_authenticated = check_authentication()
+    
+    if not is_authenticated:
+        # Show login page
+        show_login_page()
+    else:
+        # Check if onboarding is needed
+        if st.session_state.get('show_onboarding', False):
+            show_onboarding_wizard()
+        else:
+            # Show logout button in sidebar
+            show_logout_button()
+            
+            # Run the patient dashboard
+            run_dashboard()
 
 if __name__ == "__main__":
     main()
